@@ -1,6 +1,5 @@
 #!/bin/bash
 # ONOS developer ZSH profile conveniences
-# Simply include in your own .bash_aliases or .bash_profile
 
 # Root of the ONOS source tree
 export ONOS_ROOT=${ONOS_ROOT:-~/onos}
