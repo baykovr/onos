@@ -6,3 +6,4 @@ export PATH="$PATH:$JAVA_HOME/bin"
 
 export ONOS_ROOT=$(pwd) 
 source $ONOS_ROOT/tools/dev/zsh_profile
+
