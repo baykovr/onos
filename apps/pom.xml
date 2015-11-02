@@ -57,7 +57,7 @@
         <module>igmp</module>
         <module>pim</module>
         <module>mlb</module>
-    <module>FpRTE</module>
+        <module>frescoplus</module>
   </modules>
 
     <properties>

@@ -18,12 +18,11 @@
     <parent>
     <artifactId>onos-apps</artifactId>
     <groupId>org.onosproject</groupId>
-		<version>1.4.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+    <version>1.4.0-SNAPSHOT</version>
   </parent>
 
-    <groupId>edu.frescoplus.onos.FpRTE</groupId>
-    <artifactId>FpRTE</artifactId>
+    <groupId>edu.frescoplus</groupId>
+    <artifactId>frescoplus</artifactId>
     <version>1.4.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
@@ -32,8 +31,8 @@
 
     <properties>
         <onos.version>1.4.0-SNAPSHOT</onos.version>
-				<onos.app.name>FrescoPlus RunTimeEngine</onos.app.name>
-        <onos.app.origin>TAMU</onos.app.origin>
+        <onos.app.name>edu.frescoplus.onos.FP_ONOSRTE</onos.app.name>
+        <onos.app.origin>SUCCESS LAB</onos.app.origin>
     </properties>
 
     <dependencies>
@@ -75,12 +74,12 @@
     <build>
         <plugins>
             <!-- Uncomment to disable style checking -->
-            <!-- <plugin>
+            <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                     <configuration>
                     <skip>true</skip>
                     </configuration>
-            </plugin> -->
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -142,7 +141,7 @@
                         </goals>
                     </execution>
                 </executions>
-			</plugin>
+            </plugin>
         </plugins>
     </build>
 
