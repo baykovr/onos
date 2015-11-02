@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import edu.frescoplus.module.AFP_Module;
 import edu.frescoplus.module.FP_ModuleConnection;
@@ -14,14 +15,14 @@ import edu.frescoplus.module.FP_ModuleConnection;
 // Using only a Single Entry point, i.e. a single module is marked as the entry 
 // point for the program. 
 
-public class FP_CallGraph {
+public class FPM_Graph<E> implements Iterable<AFP_Module>{
 	public final String name;
 	final String mainModule;
 	
 	HashMap<String,AFP_Module> modules;
 	ArrayList<FP_ModuleConnection> connections;
 	
-	public FP_CallGraph(String name, String mainModule ,HashMap<String,AFP_Module> modules)
+	public FPM_Graph(String name, String mainModule, HashMap<String, AFP_Module> modules)
 	{
 		assert(modules.size() > 0);
 		this.name       = name;
@@ -58,4 +59,34 @@ public class FP_CallGraph {
 			}
 		}while(hasNext);
 	}
+
+    @Override
+    public Iterator<AFP_Module> iterator()
+    {
+        return new FPM_Iterator<AFP_Module>();
+    }
+
+    // Module Iterator
+	public class FPM_Iterator<E> implements Iterator<AFP_Module>
+	{
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public AFP_Module next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super AFP_Module> consumer) {
+
+        }
+    }
 }

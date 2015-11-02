@@ -6,12 +6,12 @@ import edu.frescoplus.generic.IFP_Generic;
 
 public abstract class AFP_RTE {
 	public IFP_Generic library;
-	public ArrayList<FP_CallGraph> fpApps;
+	public ArrayList<FPM_Graph> fpApps;
 	
 	
 	public AFP_RTE()
 	{
-		fpApps = new ArrayList<FP_CallGraph>();
+		fpApps = new ArrayList<FPM_Graph>();
 	}
 	
 	public abstract void exec();

@@ -26,7 +26,7 @@ public class FP_TestRTE{
 //		
 //		modules.put(mod1.getName(),mod1);
 //		
-//		FP_CallGraph testApp = new FP_CallGraph("static-app-test",mod1.getName(),modules);
+//		FPM_Graph testApp = new FPM_Graph("static-app-test",mod1.getName(),modules);
 //		
 //		// add this app to the list of all loaded apps.
 //		// 
