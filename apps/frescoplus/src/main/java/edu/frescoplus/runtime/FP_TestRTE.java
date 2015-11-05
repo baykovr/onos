@@ -1,15 +1,9 @@
 package edu.frescoplus.runtime;
 
-import java.util.HashMap;
-
-import edu.frescoplus.generic.IFP_Generic;
-import edu.frescoplus.generic.ITestGeneric;
-import edu.frescoplus.module.AFP_Module;
-import edu.frescoplus.module.FP_GetOFMsg_Module;
 //public class FP_TestRTE extends AFP_RTE{
 public class FP_TestRTE{
 //
-//	public FP_TestRTE(IFP_Generic library) {
+//	public FP_TestRTE(AFP_Generic library) {
 //		library = new ITestGeneric();
 //		
 //		this.addStaticApp();

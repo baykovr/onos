@@ -15,21 +15,43 @@
  */
 package edu.frescoplus.onos;
 
+import edu.frescoplus.module.*;
 import edu.frescoplus.runtime.AFP_RTE;
 
+import edu.frescoplus.runtime.FPM_Graph;
 import org.apache.felix.scr.annotations.*;
+import org.onlab.packet.Ethernet;
+import org.onlab.packet.IPv4;
+import org.onlab.packet.MacAddress;
 import org.onosproject.core.ApplicationId;
 import org.onosproject.core.CoreService;
-import org.onosproject.net.flow.FlowRuleService;
+import org.onosproject.net.flow.*;
+import org.onosproject.net.flow.criteria.Criterion;
+import org.onosproject.net.flow.criteria.EthCriterion;
 import org.onosproject.net.flowobjective.FlowObjectiveService;
+import org.onosproject.net.packet.PacketContext;
+import org.onosproject.net.packet.PacketPriority;
+import org.onosproject.net.packet.PacketProcessor;
 import org.onosproject.net.packet.PacketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import java.util.HashMap;
+
+import static org.onosproject.net.flow.FlowRuleEvent.Type.RULE_REMOVED;
+import static org.onosproject.net.flow.criteria.Criterion.Type.ETH_SRC;
+
 @Component(immediate = true)
 public class FpONOSRTE extends AFP_RTE {
 
+    private ApplicationId appId;
+    private static final int PRIORITY      = 128;
+    private static final int DROP_PRIORITY = 129;
+    private static final int TIMEOUT_SEC   = 60; // seconds
+
     //<editor-fold desc="Services">
+    // Services
     @Reference(cardinality = ReferenceCardinality.MANDATORY_UNARY)
     protected CoreService coreService;
 
@@ -43,24 +65,128 @@ public class FpONOSRTE extends AFP_RTE {
     protected PacketService packetService;
     //</editor-fold>
 
-    private ApplicationId appId;
+    //<editor-fold desc="Network Processors">
+    // Network Processors
+    private PacketProcessor packetProcessor = new FP_PacketProcessor();
+    private FlowRuleListener flowListener   = new FP_FlowListener();
+
+    // Selector for ICMP traffic that is to be intercepted
+    private final TrafficSelector intercept = DefaultTrafficSelector.builder()
+            .matchEthType(Ethernet.TYPE_IPV4).build();
+    //we can also select by ICMP
+    //matchIPProtocol(IPv4.ICMP).build
+    //</editor-fold>
+
+
     //private final PacketProcessor packetProcessor = new PingPacketProcessor();
     //private final FlowRuleListener flowListener = new InternalFlowListener();
-    private final Logger log = LoggerFactory.getLogger(getClass());
+
 
     @Activate
     protected void activate()
     {
-        log.info("Started");
+        appId = coreService.registerApplication("edu.frescoplug.onos.FpONOSRTE");
+        packetService.addProcessor(packetProcessor, PRIORITY);
+        flowRuleService.addListener(flowListener);
+
+        // packet selector intercept
+        packetService.requestPackets(intercept, PacketPriority.REACTIVE, appId);
+
+        library = new FpLibONOS(LoggerFactory.getLogger( getClass() ));
+
+        addStaticApp();
+
+        library.log.info("Started");
     }
 
     @Deactivate
-    protected void deactivate() {
-        log.info("Stopped");
+    protected void deactivate()
+    {
+        packetService.removeProcessor(packetProcessor);
+        flowRuleService.removeFlowRulesById(appId);
+        flowRuleService.removeListener(flowListener);
+        library.log.info("Stopped");
     }
 
+    //<editor-fold desc="FP Run Time Engine">
+    // Run Time Engine
     @Override
     public void exec() {
         // Execute AFP RTE Applications
+        // One by one.
+        if ( fpApps.size() > 0)
+        {
+            library.log.info("[FP] Executing : {} \n", fpApps.get(0).name);
+
+            fpApps.get(0).exec();
+        }
+        else
+        {
+            library.logModuleError("No applicatios or modules to run.");
+        }
     }
+
+    public void addStaticApp()
+    {
+        //String name, String mainModule ,HashMap<String,AFP_Module modules
+        HashMap<String,AFP_Module> modules = new HashMap<String,AFP_Module>();
+
+        // This test app has a single module, next is null since this is the one and only module
+
+        FP_GetOFMsg_Module getter  = new FP_GetOFMsg_Module("Get_Source_Host","Print_Source",super.library);
+
+        FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
+                getter.out_ports.get(0));
+
+        FP_BlacklistModule blacklist = new FP_BlacklistModule("Blacklist_Check","Dropper",super.library,
+                getter.out_ports.get(0),
+                null );
+        blacklist.addBlackItem("10.0.0.1");
+
+        FP_DropperModule dropper = new FP_DropperModule("Dropper",null,super.library,
+                blacklist.out_ports.get(0));
+
+        modules.put(getter.getName(),getter);
+        modules.put(printer.getName(),printer);
+        modules.put(blacklist.getName(),blacklist);
+        modules.put(dropper.getName(),dropper);
+
+        FPM_Graph testApp = new FPM_Graph("static-app-test",getter.getName(),modules);
+
+        super.fpApps.add(testApp);
+    }
+    //</editor-fold>
+// ---------------------------------------------------------------------------------------------------------------------
+    //<editor-fold desc="Listeners">
+    private class FP_PacketProcessor implements PacketProcessor {
+        @Override
+        public void process(PacketContext context)
+        {
+            library.log.info("Got a packet!");
+            exec();
+
+            // traffic filter grantees IPv4
+            //
+            //Ethernet eth = context.inPacket().parsed(); // null if not ethernet
+            //            if (isIcmpPing(eth)) {
+            //                processPing(context, eth);
+            //            }
+        }
+    }
+    // Onos allows us to easily listen for flow rule events
+    // flow removed etc...
+    private class FP_FlowListener implements FlowRuleListener {
+        @Override
+        public void event(FlowRuleEvent event)
+        {
+//            FlowRule flowRule = event.subject();
+//            if (event.type() == RULE_REMOVED && flowRule.appId() == appId.id()) {
+//                Criterion criterion = flowRule.selector().getCriterion(ETH_SRC);
+//                MacAddress src = ((EthCriterion) criterion).mac();
+//                MacAddress dst = ((EthCriterion) criterion).mac();
+//                log.warn("Re-enabled ping from {} to {} on {}", src, dst, flowRule.deviceId());
+//            }
+        }
+    }
+    //</editor-fold>
 }

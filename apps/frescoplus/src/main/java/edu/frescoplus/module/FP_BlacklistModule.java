@@ -2,8 +2,7 @@ package edu.frescoplus.module;
 
 import java.util.HashSet;
 
-import edu.frescoplus.generic.IFP_Generic;
-import edu.frescoplus.module.AFP_Module.Port;
+import edu.frescoplus.generic.AFP_Generic;
 
 
 public class FP_BlacklistModule extends AFP_Module{
@@ -16,7 +15,7 @@ public class FP_BlacklistModule extends AFP_Module{
 	
 	public HashSet<String> blacklist;
 	
-	public FP_BlacklistModule(String name, String next, IFP_Generic library,
+	public FP_BlacklistModule(String name, String next, AFP_Generic library,
 			Port<?> dataPort,
 			Port<?> resultPort) 
 	{
@@ -44,17 +43,17 @@ public class FP_BlacklistModule extends AFP_Module{
 	
 	@Override
 	public void run() {
-		library.print("[FP]{FP_BlacklistModule} enter.");
+		library.log.info("[FP]{FP_BlacklistModule} enter.");
 		
 		if(in_ports.get(0).data == null)
 		{
-			library.print("[FP]{FP_BlacklistModule} aborting on null in port.");
+			library.log.info("[FP]{FP_BlacklistModule} aborting on null in port.");
 			return;
 		}
 		
 		if(blacklist.contains( in_ports.get(0).data.toString() ))
 		{
-			library.print("[FP]{FP_BlacklistModule} has a match on "+ in_ports.get(0).data.toString() );
+			library.log.info("[FP]{FP_BlacklistModule} has a match on "+ in_ports.get(0).data.toString() );
 			out_ports.get(0).data = true;
 		}
 		else

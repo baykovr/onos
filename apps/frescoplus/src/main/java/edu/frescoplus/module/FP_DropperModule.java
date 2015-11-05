@@ -1,13 +1,13 @@
 package edu.frescoplus.module;
 
-import edu.frescoplus.generic.IFP_Generic;
+import edu.frescoplus.generic.AFP_Generic;
 
 public class FP_DropperModule extends AFP_Module {
 
 	// Inpurt Ports
 	// 0 : if true will attempt to use aboard broadcast method.
 	
-	public FP_DropperModule(String name, String next, IFP_Generic library,
+	public FP_DropperModule(String name, String next, AFP_Generic library,
 			Port doAbort) {
 		super(name, next, library);
 		in_ports.add(doAbort);

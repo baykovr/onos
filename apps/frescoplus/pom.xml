@@ -26,13 +26,13 @@
     <version>1.4.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-    <description>ONOS OSGi bundle archetype</description>
+    <description>FrescoPlus Run Time Engine</description>
     <url>http://onosproject.org</url>
 
     <properties>
         <onos.version>1.4.0-SNAPSHOT</onos.version>
         <onos.app.name>edu.frescoplus.onos.FP_ONOSRTE</onos.app.name>
-        <onos.app.origin>SUCCESS LAB</onos.app.origin>
+        <onos.app.origin>TAMU SUCCESS Laboratory</onos.app.origin>
     </properties>
 
     <dependencies>

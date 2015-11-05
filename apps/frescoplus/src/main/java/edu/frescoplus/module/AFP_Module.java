@@ -2,7 +2,7 @@ package edu.frescoplus.module;
 
 import java.util.ArrayList;
 
-import edu.frescoplus.generic.IFP_Generic;
+import edu.frescoplus.generic.AFP_Generic;
 
 // @name    : name of this module.
 // @next    : name of next module to be invoked, pass null if no next module.
@@ -17,12 +17,12 @@ public abstract class AFP_Module {
 	final String name; // must be unique.
 	String next; 
 	
-	IFP_Generic library;
+	AFP_Generic library;
 	
 	public ArrayList<Port> in_ports;
 	public ArrayList<Port> out_ports;
 	
-	public AFP_Module(String name, String next, IFP_Generic library)
+	public AFP_Module(String name, String next, AFP_Generic library)
 	{
 		this.name    = name;
 		this.next    = next;

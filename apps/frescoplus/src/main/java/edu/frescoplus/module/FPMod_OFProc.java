@@ -1,7 +1,6 @@
 package edu.frescoplus.module;
 
-import edu.frescoplus.generic.IFP_Generic;
-import edu.frescoplus.module.AFP_Module.Port;
+import edu.frescoplus.generic.AFP_Generic;
 
 // Grabs an open flow msg by parameter
 public class FPMod_OFProc extends AFP_Module{
@@ -16,7 +15,7 @@ public class FPMod_OFProc extends AFP_Module{
 	String par_packetType;
 	String par_packetField;
 
-	public FPMod_OFProc(String name, String next, IFP_Generic library) {
+	public FPMod_OFProc(String name, String next, AFP_Generic library) {
 		super(name, next, library);
 		
 		out_ports.add( new Port<>());
@@ -28,7 +27,7 @@ public class FPMod_OFProc extends AFP_Module{
 	@Override
 	public void run() 
 	{
-		library.print("[FP]{FP_GetOFMsg_Module} enter.");
+		library.log.info("[FP]{FP_GetOFMsg_Module} enter.");
 		switch(par_packetType)
 		{
 			case ("PACKET_IN"):
@@ -48,10 +47,10 @@ public class FPMod_OFProc extends AFP_Module{
 	{
 		if (library.isPacketIN() )
 		{
-			T source_host = library.getSrcHostIP();
+			Object source_host = library.getSrcHostIP();
 			if(source_host != null)
 			{
-				library.print("[FP]{FP_GetOFMsg_Module} enter."+source_host.toString());
+				library.log.info("[FP]{FP_GetOFMsg_Module} enter."+source_host.toString());
 				out_ports.get(0).data = source_host;
 			}
 		}

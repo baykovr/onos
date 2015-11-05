@@ -2,7 +2,7 @@ package edu.frescoplus.module;
 
 import java.util.HashMap;
 
-import edu.frescoplus.generic.IFP_Generic;
+import edu.frescoplus.generic.AFP_Generic;
 
 // This is a test DB implementation which holds strings in memory
 // using a hash map.
@@ -19,7 +19,7 @@ public class FP_DBModule extends AFP_Module {
 	// in-memory data base
 	HashMap<String,String> database;
 	
-	public FP_DBModule(String name, String next, IFP_Generic library) {
+	public FP_DBModule(String name, String next, AFP_Generic library) {
 		super(name, next, library);
 		
 		in_ports.add( new Port());

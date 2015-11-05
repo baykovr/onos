@@ -2,10 +2,10 @@ package edu.frescoplus.runtime;
 
 import java.util.ArrayList;
 
-import edu.frescoplus.generic.IFP_Generic;
+import edu.frescoplus.generic.AFP_Generic;
 
 public abstract class AFP_RTE {
-	public IFP_Generic library;
+	public AFP_Generic library;
 	public ArrayList<FPM_Graph> fpApps;
 	
 	
