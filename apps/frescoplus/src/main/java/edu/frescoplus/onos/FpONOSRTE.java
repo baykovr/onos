@@ -92,6 +92,7 @@ public class FpONOSRTE extends AFP_RTE {
         // packet selector intercept
         packetService.requestPackets(intercept, PacketPriority.REACTIVE, appId);
 
+        // Instantiate the generic function library with our ONOS function binding imlementation.
         library = new FpLibONOS(LoggerFactory.getLogger( getClass() ));
 
         addStaticApp();
@@ -112,18 +113,11 @@ public class FpONOSRTE extends AFP_RTE {
     // Run Time Engine
     @Override
     public void exec() {
-        // Execute AFP RTE Applications
-        // One by one.
-        if ( fpApps.size() > 0)
-        {
-            library.log.info("[FP] Executing : {} \n", fpApps.get(0).name);
+        // Do custom operations (ONOS)
+        library.log.info( library.db.data.get(0).data.toString() );
 
-            fpApps.get(0).exec();
-        }
-        else
-        {
-            library.logModuleError("No applicatios or modules to run.");
-        }
+        // Execute AFP RTE Applications
+        //super.exec();
     }
 
     public void addStaticApp()

@@ -14,5 +14,17 @@ public abstract class AFP_RTE {
 		fpApps = new ArrayList<FPM_Graph>();
 	}
 	
-	public abstract void exec();
+	public void exec()
+	{
+		if ( fpApps.size() > 0)
+		{
+			library.log.info("[FP] Executing : {} \n", fpApps.get(0).name);
+
+			fpApps.get(0).exec();
+		}
+		else
+		{
+			library.logModuleError("No applicatios or modules to run.");
+		}
+	}
 }

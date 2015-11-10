@@ -1,6 +1,7 @@
 package edu.frescoplus.onos;
 
 import edu.frescoplus.generic.AFP_Generic;
+import edu.frescoplus.database.FP_DBEntry;
 import org.onlab.packet.Ethernet;
 import org.onlab.packet.IPv4;
 import org.onlab.packet.MacAddress;
@@ -13,7 +14,6 @@ import org.onosproject.net.flow.TrafficTreatment;
 import org.onosproject.net.flowobjective.DefaultForwardingObjective;
 import org.onosproject.net.flowobjective.FlowObjectiveService;
 import org.onosproject.net.flowobjective.ForwardingObjective;
-import org.onosproject.net.intent.Intent;
 import org.onosproject.net.packet.PacketContext;
 
 import org.slf4j.Logger;
@@ -30,6 +30,16 @@ public class FpLibONOS extends AFP_Generic {
     public FpLibONOS(Logger log)
     {
         super(log);
+
+        FP_DBEntry<Integer> tem_istr = new FP_DBEntry<Integer>(1,"test");
+
+        FP_DBEntry<String> tem_iint = new FP_DBEntry<String>("test",2);
+
+        db.data.add(tem_istr);
+        db.data.add(tem_iint);
+
+        log.info( db.data.get(0).data.toString() );
+        System.out.println(db.data.get(1).data);
     }
 
     public void setContext(PacketContext context)
@@ -84,6 +94,7 @@ public class FpLibONOS extends AFP_Generic {
 
     }
 
+
     @Override
     public void blockPacket() {
 
@@ -104,13 +115,14 @@ public class FpLibONOS extends AFP_Generic {
         TrafficTreatment drop = DefaultTrafficTreatment.builder()
                 .drop().build();
 
+        // Forward request to service
         flowObjectiveService.forward(deviceId, DefaultForwardingObjective.builder()
                 .fromApp(appId)
                 .withSelector(selector)
                 .withTreatment(drop)
                 .withFlag(ForwardingObjective.Flag.VERSATILE)
-                .withPriority(128) //not sure here
-                .makeTemporary(60) //seconds
+                .withPriority(128) //integer value
+                .makeTemporary(60) //expiration
                 .add());
     }
 
@@ -139,4 +151,12 @@ public class FpLibONOS extends AFP_Generic {
             return null;
         }
     }
+
+    // Traffic Shaping
+    @Override
+    public void hostRedirect(Object host_x, Object host_y)
+    {
+
+    }
+
 }
