@@ -154,9 +154,29 @@ public class FpLibONOS extends AFP_Generic {
 
     // Traffic Shaping
     @Override
-    public void hostRedirect(Object host_x, Object host_y)
+    public void hostRedirect(Object mac_x, Object mac_y)
     {
+        DeviceId deviceId = context.inPacket().receivedFrom().deviceId();
+        Ethernet eth = this.context.inPacket().parsed();
+        MacAddress src = eth.getSourceMAC();
+        MacAddress dst = eth.getDestinationMAC();
 
+        // Matcher
+        TrafficSelector forward = DefaultTrafficSelector.builder()
+                .matchEthSrc(src).matchEthDst(dst).build();
+
+        // Action
+        //TrafficTreatment drop = DefaultTrafficTreatment.builder().setTcpDst()
+
+        // Forward request to service
+        flowObjectiveService.forward(deviceId, DefaultForwardingObjective.builder()
+                .fromApp(appId)
+                .withSelector(selector)
+                .withTreatment(forward)
+                .withFlag(ForwardingObjective.Flag.VERSATILE)
+                .withPriority(128) //integer value
+                .makeTemporary(60) //expiration
+                .add());
     }
 
 }

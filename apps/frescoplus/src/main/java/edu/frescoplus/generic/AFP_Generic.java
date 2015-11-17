@@ -27,7 +27,7 @@ public abstract class AFP_Generic<L,C> {
 
 
 	// Traffic Shaping
-	public abstract <T> void hostRedirect(T host_x, T host_y);
+	public abstract <T> void hostRedirect(T mac_x, T mac_y);
 
 	 // Logging and Printing
 	public <T extends String> void logModuleError(T error)
