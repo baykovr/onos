@@ -16,7 +16,7 @@ public class FP_TestRTE{
 //		
 //		// This test app has a single module, next is null since this is the one and only module
 //		
-//		AFP_Module mod1 = new FP_GetOFMsg_Module("GetOF1",null,super.library); 
+//		AFP_Module mod1 = new FPM_E_NewFlow("GetOF1",null,super.library);
 //		
 //		modules.put(mod1.getName(),mod1);
 //		

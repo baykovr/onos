@@ -6,8 +6,13 @@ import java.util.stream.Stream;
 /**
  * Created by baykovr on 11/10/15.
  *
- * Need to support generic filter and selector to retrieve collection of data (based on filter).
- * A filter is a generic predicate function, which we will implement in the instantiation of the library.
+ * The fp database provides a high level interface between fp modules and the nos.
+ *
+ *
+ * TODO
+ * 1. DB Streams, packets,events and app data
+ * 2. DB Stream Selectors/Filters (lambdas)
+ *
  */
 public class FP_DB
 {
@@ -15,7 +20,7 @@ public class FP_DB
 
     public FP_DB()
     {
-        data = new ArrayList<>();
+        data = new ArrayList<FP_DBEntry>();
     }
 
     public <T> Stream<T> select()

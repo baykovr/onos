@@ -21,26 +21,18 @@ import edu.frescoplus.runtime.AFP_RTE;
 import edu.frescoplus.runtime.FPM_Graph;
 import org.apache.felix.scr.annotations.*;
 import org.onlab.packet.Ethernet;
-import org.onlab.packet.IPv4;
-import org.onlab.packet.MacAddress;
 import org.onosproject.core.ApplicationId;
 import org.onosproject.core.CoreService;
 import org.onosproject.net.flow.*;
-import org.onosproject.net.flow.criteria.Criterion;
-import org.onosproject.net.flow.criteria.EthCriterion;
 import org.onosproject.net.flowobjective.FlowObjectiveService;
 import org.onosproject.net.packet.PacketContext;
 import org.onosproject.net.packet.PacketPriority;
 import org.onosproject.net.packet.PacketProcessor;
 import org.onosproject.net.packet.PacketService;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import java.util.HashMap;
-
-import static org.onosproject.net.flow.FlowRuleEvent.Type.RULE_REMOVED;
-import static org.onosproject.net.flow.criteria.Criterion.Type.ETH_SRC;
 
 @Component(immediate = true)
 public class FpONOSRTE extends AFP_RTE {
@@ -127,7 +119,7 @@ public class FpONOSRTE extends AFP_RTE {
 
         // This test app has a single module, next is null since this is the one and only module
 
-        FP_GetOFMsg_Module getter  = new FP_GetOFMsg_Module("Get_Source_Host","Print_Source",super.library);
+        FPM_E_NewFlow getter  = new FPM_E_NewFlow("Get_Source_Host","Print_Source",super.library);
 
         FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
                 getter.out_ports.get(0));
