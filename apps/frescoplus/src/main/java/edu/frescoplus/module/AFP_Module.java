@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 import edu.frescoplus.generic.AFP_Generic;
 
-// @name    : name of this module.
-// @next    : name of next module to be invoked, pass null if no next module.
-// @library : generic library interface implementation to use (i.e. floodlight library)
+/*
 
+
+*
+* @param next The name of next module to be invoked, null if none.
+* @param name The name of this module.
+* @param library The generic library interface implementation to use (e.g. floodlight, onos libs)
+* TODO: Define parameter class, since the prototype is just strings, this inefficient.
+* */
 public abstract class AFP_Module {
 	
 	// list of input ports
