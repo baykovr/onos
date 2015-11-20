@@ -19,12 +19,12 @@ public abstract class AFP_Generic<L,C> {
 	public abstract boolean isICMP();
 	public abstract boolean isTCP();
 	public abstract boolean isUDP();
+
 	// Packet Attribute Retrieval (IPv4)
 	public abstract <T> T getSrcHostIP();
 	public abstract <T> T getDstHostIP();
 	public abstract void getDstPort();
 	public abstract void getSrcPort();
-
 
 	// Traffic Shaping
 	public abstract <T> void hostRedirect(T mac_x, T mac_y);
@@ -43,7 +43,62 @@ public abstract class AFP_Generic<L,C> {
 	// State Tracking / Stateful
 	// Device Management
 	// Timers
-
 	// Database
+	// *-*
+
+	//<editor-fold desc="Controller Specific Drivers">
+	// e.g. controller execution context, states, etc.
+	//</editor-fold>
+
+	//<editor-fold desc="Control Plane Operations">
+	//</editor-fold>
+
+	/*
+	* Packet operations, namely retrieval (reading) and modification (writing).
+	*
+	* Use Case: Reading is straight forward, all network logic relies on the
+	* fundamental ability to read information from network flows.
+	*
+	* Modifying packets is necessary for higher order management,
+	* e.g. beyond simple routing.
+	* */
+	//<editor-fold desc="L1 Operations">
+	// e.g. Switch port number
+	//</editor-fold>
+
+	//<editor-fold desc="L2 Operations">
+	// e.g. MAC
+	//</editor-fold>
+
+	//<editor-fold desc="L3 Operations">
+	// e.g. HTTP
+	//</editor-fold>
+
+	//<editor-fold desc="L4 Operations">
+	// e.g. HTTP
+	//</editor-fold>
+
+	//<editor-fold desc="L7 Operations">
+	// e.g. HTTP
+	//</editor-fold>
+
+	/*
+	* Host operations, abstractions above flows.
+	*
+	* We may wish to track a host by some attribute (typically MAC)
+	* across the network.
+	* */
+	//<editor-fold desc="Host Operations">
+	// e.g. discovery, quarantine, traffic isolation.
+	//</editor-fold>
+
+	/*
+	* Database, flow logging and more.
+	*
+	* Storing network information is required in oder to implement
+	* network state tracking applications (such as a load-balancer).
+	*
+	*
+	* */
 }
 
