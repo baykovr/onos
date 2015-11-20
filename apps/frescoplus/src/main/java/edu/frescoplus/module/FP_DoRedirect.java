@@ -28,7 +28,7 @@ public class FP_DoRedirect extends AFP_Module {
         Object host_x = in_ports.get(0);
         Object host_y = in_ports.get(1);
 
-        library.hostRedirect(host_x,host_y);
+        //library.hostRedirect(host_x,host_y);
 
     }
 }

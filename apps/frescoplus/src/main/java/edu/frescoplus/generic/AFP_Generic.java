@@ -1,56 +1,46 @@
 package edu.frescoplus.generic;
 
 import edu.frescoplus.database.FP_DB;
+import org.omg.CORBA.Object;
 import org.slf4j.Logger;
 
-public abstract class AFP_Generic<L,C> {
-	// IO
-	public final Logger log;
-	public final FP_DB db;
-
+public abstract class AFP_Generic {
 	public AFP_Generic(Logger log)
 	{
 		this.log = log;
 		db = new FP_DB();
 	}
-	// Packet Checkers
-	public abstract boolean isPacketIN();
-	public abstract boolean isIPv4();
-	public abstract boolean isICMP();
-	public abstract boolean isTCP();
-	public abstract boolean isUDP();
 
-	// Packet Attribute Retrieval (IPv4)
-	public abstract <T> T getSrcHostIP();
-	public abstract <T> T getDstHostIP();
-	public abstract void getDstPort();
-	public abstract void getSrcPort();
+	//<editor-fold desc="Helpers">
+	public final Logger log;
 
-	// Traffic Shaping
-	public abstract <T> void hostRedirect(T mac_x, T mac_y);
-
-	 // Logging and Printing
 	public <T extends String> void logModuleError(T error)
 	{
 		log.error(error);
 	}
-
-	// Attempt to suppress (ignore) generating PACKET_OUT response to PACKET_IN
-	public abstract void blockPacket();
-
-	public abstract void blockSrcHost();
-
-	// State Tracking / Stateful
-	// Device Management
-	// Timers
-	// Database
-	// *-*
+	//</editor-fold>
 
 	//<editor-fold desc="Controller Specific Drivers">
 	// e.g. controller execution context, states, etc.
+	public abstract class Packet<T>
+	{
+		T packet;
+		public Packet(T packet)
+		{
+			this.packet = packet;
+		}
+	}
+	public Packet packet;
 	//</editor-fold>
 
-	//<editor-fold desc="Control Plane Operations">
+	//<editor-fold desc="Control Operations">
+	// e.g. traffic shaping, blocking hosts, etc.
+	// Attempt to suppress (ignore) generating PACKET_OUT response to PACKET_IN
+	/*public abstract void blockPacket();
+	public abstract void blockSrcHost();
+	public abstract <T> void hostRedirect(T mac_x, T mac_y);*/
+	public abstract <T> void blockMAC(T mac);
+
 	//</editor-fold>
 
 	/*
@@ -62,24 +52,43 @@ public abstract class AFP_Generic<L,C> {
 	* Modifying packets is necessary for higher order management,
 	* e.g. beyond simple routing.
 	* */
+
 	//<editor-fold desc="L1 Operations">
 	// e.g. Switch port number
 	//</editor-fold>
 
 	//<editor-fold desc="L2 Operations">
 	// e.g. MAC
+	public abstract <T> T getSrcMAC();
+	public abstract <T> T getDstMAC();
 	//</editor-fold>
 
 	//<editor-fold desc="L3 Operations">
-	// e.g. HTTP
+	// e.g. IPv4, IPv6, ICMP
+	// TODO: Add IPv6 support.
+
+	public abstract boolean isIPv4();
+
+	public abstract <T> T getSrcAddr();
+	public abstract <T> T getDstAddr();
 	//</editor-fold>
 
 	//<editor-fold desc="L4 Operations">
-	// e.g. HTTP
+	// e.g. TCP, UDP
+	public abstract boolean isICMP();
+
+	public abstract boolean isTCP();
+	public abstract boolean isUDP();
+
+	public abstract <T> T getDstPort();
+	public abstract <T> T getSrcPort();
 	//</editor-fold>
 
 	//<editor-fold desc="L7 Operations">
 	// e.g. HTTP
+	public abstract boolean isHTTP();
+	public abstract <T> T getPayload();
+
 	//</editor-fold>
 
 	/*
@@ -100,5 +109,6 @@ public abstract class AFP_Generic<L,C> {
 	*
 	*
 	* */
+	public final FP_DB db;
 }
 

@@ -16,11 +16,11 @@ import edu.frescoplus.generic.AFP_Generic;
  * 0 Packet Type
  * 1 Field Specification
  */
-public class FPM_PktFieldSelector extends AFP_Module{
+public class FPM_pktFieldSelector extends AFP_Module{
 
     Class<?> pktField;
 
-    public FPM_PktFieldSelector(String name, String next, AFP_Generic library,
+    public FPM_pktFieldSelector(String name, String next, AFP_Generic library,
                                 Port pktData, Class<?> pktField)
     {
         super(name,next,library);
@@ -34,6 +34,10 @@ public class FPM_PktFieldSelector extends AFP_Module{
     {
         // TODO Library should provide packet abstraction, cast to lib.Packet.
         Object packet = in_ports.get(0).data;
+        if( library.isIPv4() )
+        {
+
+        }
         // Check type and extract field
         // check field, actually field implies packet type
         // library.packet.ipv4.source_address

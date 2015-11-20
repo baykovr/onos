@@ -19,7 +19,7 @@ public class FP_DropperModule extends AFP_Module {
 		{
 			if ( (boolean)in_ports.get(0).data )
 			{
-				library.blockPacket();
+				//library.blockPacket();
 			}
 		}
 		

@@ -2,9 +2,8 @@ package edu.frescoplus.onos;
 
 import edu.frescoplus.generic.AFP_Generic;
 import edu.frescoplus.database.FP_DBEntry;
-import org.onlab.packet.Ethernet;
-import org.onlab.packet.IPv4;
-import org.onlab.packet.MacAddress;
+import org.omg.CORBA.Object;
+import org.onlab.packet.*;
 import org.onosproject.core.ApplicationId;
 import org.onosproject.net.DeviceId;
 import org.onosproject.net.flow.DefaultTrafficSelector;
@@ -18,183 +17,158 @@ import org.onosproject.net.packet.PacketContext;
 
 import org.slf4j.Logger;
 
-/**
- * Created by baykovr on 10/27/15.
- */
-public class FP_LibONOS extends AFP_Generic {
+import javax.crypto.Mac;
 
+public class FP_LibONOS extends AFP_Generic {
     private ApplicationId appId;
     private PacketContext context;
     private FlowObjectiveService flowObjectiveService;
 
-    public FP_LibONOS(Logger log)
-    {
+    private Ethernet ethPacket;
+
+    public FP_LibONOS(Logger log) {
         super(log);
-
-        FP_DBEntry<Integer> tem_istr = new FP_DBEntry<Integer>(1,"test");
-
-        FP_DBEntry<String> tem_iint = new FP_DBEntry<String>("test",2);
-
-        db.data.add(tem_istr);
-        db.data.add(tem_iint);
-
-        log.info( db.data.get(0).data.toString() );
-        System.out.println(db.data.get(1).data);
     }
-
-    // ONOS Specific driver attributes.
 
     public void setContext(PacketContext context)
     {
         this.context = context;
+        ethPacket = context.inPacket().parsed();
     }
-
-    public void setFlowObjectiveService(FlowObjectiveService flowObjectiveService)
-    {
-        this.flowObjectiveService = flowObjectiveService;
-    }
-
-    // Generic function implementation.
-
-
-    //<editor-fold desc="Control Plane Operations">
     @Override
-    public boolean isPacketIN() {
-        return false;
+    public MacAddress getSrcMAC() {
+        return ethPacket.getDestinationMAC();
     }
-    //</editor-fold>
 
-    //<editor-fold desc="L3 Operations">
-    // e.g. IPv4/6, ICMP
+    @Override
+    public MacAddress getDstMAC() {
+        return ethPacket.getSourceMAC();
+    }
+
     @Override
     public boolean isIPv4() {
-        Ethernet eth = this.context.inPacket().parsed();
-        return eth.getEtherType() == Ethernet.TYPE_IPV4;
+        return ethPacket.getEtherType() == Ethernet.TYPE_IPV4;
     }
 
     @Override
     public boolean isICMP() {
-        Ethernet eth = this.context.inPacket().parsed();
-        return eth.getEtherType() == Ethernet.TYPE_IPV4 &&
-                ((IPv4) eth.getPayload()).getProtocol() == IPv4.PROTOCOL_ICMP;
+        return ethPacket.getEtherType() == Ethernet.TYPE_IPV4 &&
+                ((IPv4) ethPacket.getPayload()).getProtocol() == IPv4.PROTOCOL_ICMP;
     }
 
-    //</editor-fold>
+    @Override
+    public Integer getSrcAddr() {
+        if( isIPv4() )
+        {
+            return ((IPv4)ethPacket.getPayload()).getSourceAddress();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-    //<editor-fold desc="L4 Operations">
-    // e.g. TCP UDP
+    @Override
+    public Integer getDstAddr() {
+        if( isIPv4() )
+        {
+            return ((IPv4)ethPacket.getPayload()).getDestinationAddress();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     @Override
     public boolean isTCP() {
-        Ethernet eth = this.context.inPacket().parsed();
-        return eth.getEtherType() == Ethernet.TYPE_IPV4 &&
-                ((IPv4) eth.getPayload()).getProtocol() == IPv4.PROTOCOL_TCP;
+        return ethPacket.getEtherType() == Ethernet.TYPE_IPV4 &&
+                ((IPv4) ethPacket.getPayload()).getProtocol() == IPv4.PROTOCOL_TCP;
     }
 
     @Override
     public boolean isUDP() {
-        Ethernet eth = this.context.inPacket().parsed();
-        return eth.getEtherType() == Ethernet.TYPE_IPV4 &&
-                ((IPv4) eth.getPayload()).getProtocol() == IPv4.PROTOCOL_UDP;
+        return ethPacket.getEtherType() == Ethernet.TYPE_IPV4 &&
+                ((IPv4) ethPacket.getPayload()).getProtocol() == IPv4.PROTOCOL_UDP;
     }
 
     @Override
-    public void getDstPort() {
-
+    public Integer getDstPort() {
+        if( isTCP() )
+        {
+            // I love inlining too but someone needs to read this eventually.
+            IPv4 ipv4 = (IPv4) ethPacket.getPayload();
+            TCP  tcp  = (TCP) ipv4.getPayload();
+            return tcp.getDestinationPort();
+        }
+        else if( isUDP() )
+        {
+            IPv4 ipv4 = (IPv4) ethPacket.getPayload();
+            UDP udp  = (UDP) ipv4.getPayload();
+            return udp.getDestinationPort();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @Override
-    public void getSrcPort() {
-
+    public Integer getSrcPort() {
+        if( isTCP() )
+        {
+            // I love inlining too but someone needs to read this eventually.
+            IPv4 ipv4 = (IPv4) ethPacket.getPayload();
+            TCP  tcp  = (TCP) ipv4.getPayload();
+            return tcp.getSourcePort();
+        }
+        else if( isUDP() )
+        {
+            IPv4 ipv4 = (IPv4) ethPacket.getPayload();
+            UDP udp  = (UDP) ipv4.getPayload();
+            return udp.getSourcePort();
+        }
+        else
+        {
+            return null;
+        }
     }
-    //</editor-fold>
-
-    //<editor-fold desc="L7 Operations">
-    // e.g. HTTP
-    //</editor-fold>
 
     @Override
-    public void blockPacket() {
-
+    public boolean isHTTP() {
+        return false;
     }
 
     @Override
-    public void blockSrcHost() {
+    public <T> T getPayload() {
+        return null;
+    }
+
+
+    @Override
+    public <T> void blockMAC(T mac)
+    {
         DeviceId deviceId = context.inPacket().receivedFrom().deviceId();
-        Ethernet eth = this.context.inPacket().parsed();
-        MacAddress src = eth.getSourceMAC();
-        MacAddress dst = eth.getDestinationMAC();
+
+        MacAddress src = (MacAddress) mac;
 
         // Matcher
         TrafficSelector selector = DefaultTrafficSelector.builder()
-                .matchEthSrc(src).matchEthDst(dst).build();
+                .matchEthSrc(src).build();
 
         // Action
         TrafficTreatment drop = DefaultTrafficTreatment.builder()
                 .drop().build();
 
-        // Forward request to service
+        //Forward request to service
         flowObjectiveService.forward(deviceId, DefaultForwardingObjective.builder()
                 .fromApp(appId)
                 .withSelector(selector)
                 .withTreatment(drop)
                 .withFlag(ForwardingObjective.Flag.VERSATILE)
                 .withPriority(128) //integer value
-                .makeTemporary(60) //expiration
+                .makeTemporary(60) //expiration (optional)
                 .add());
+
     }
-
-    @Override
-    public Integer getDstHostIP() {
-        Ethernet eth = this.context.inPacket().parsed();
-        if (isTCP() )
-        {
-            return ((IPv4)eth.getPayload()).getDestinationAddress();
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    @Override
-    public Integer getSrcHostIP() {
-        Ethernet eth = this.context.inPacket().parsed();
-        if (isTCP() )
-        {
-            return ((IPv4)eth.getPayload()).getSourceAddress();
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    // Traffic Shaping
-    @Override
-    public void hostRedirect(Object mac_x, Object mac_y)
-    {
-        DeviceId deviceId = context.inPacket().receivedFrom().deviceId();
-        Ethernet eth = this.context.inPacket().parsed();
-        MacAddress src = eth.getSourceMAC();
-        MacAddress dst = eth.getDestinationMAC();
-
-        // Matcher
-        TrafficSelector forward = DefaultTrafficSelector.builder()
-                .matchEthSrc(src).matchEthDst(dst).build();
-
-        // Action
-        //TrafficTreatment drop = DefaultTrafficTreatment.builder().setTcpDst()
-
-        // Forward request to service
-//        flowObjectiveService.forward(deviceId, DefaultForwardingObjective.builder()
-//                .fromApp(appId)
-//                .withSelector(selector)
-//                .withTreatment(forward)
-//                .withFlag(ForwardingObjective.Flag.VERSATILE)
-//                .withPriority(128) //integer value
-//                .makeTemporary(60) //expiration
-//                .add());
-    }
-
 }

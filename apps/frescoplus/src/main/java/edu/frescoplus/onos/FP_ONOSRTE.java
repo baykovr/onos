@@ -119,7 +119,7 @@ public class FP_ONOSRTE extends AFP_RTE {
 
         // This test app has a single module, next is null since this is the one and only module
 
-        FPM_E_NewFlow getter  = new FPM_E_NewFlow("Get_Source_Host","Print_Source",super.library);
+        FPM_procNewFlow getter  = new FPM_procNewFlow("Get_Source_Host","Print_Source",super.library);
 
         FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
                 getter.out_ports.get(0));
