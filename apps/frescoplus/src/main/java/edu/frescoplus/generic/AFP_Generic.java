@@ -22,24 +22,26 @@ public abstract class AFP_Generic {
 
 	//<editor-fold desc="Controller Specific Drivers">
 	// e.g. controller execution context, states, etc.
-	public abstract class Packet<T>
-	{
-		T packet;
-		public Packet(T packet)
-		{
-			this.packet = packet;
-		}
-	}
-	public Packet packet;
+//	public abstract class Packet<T>
+//	{
+//		T packet;
+//		public Packet(T packet)
+//		{
+//			this.packet = packet;
+//		}
+//	}
+//	public Packet packet;
 	//</editor-fold>
 
 	//<editor-fold desc="Control Operations">
 	// e.g. traffic shaping, blocking hosts, etc.
-	// Attempt to suppress (ignore) generating PACKET_OUT response to PACKET_IN
-	/*public abstract void blockPacket();
-	public abstract void blockSrcHost();
-	public abstract <T> void hostRedirect(T mac_x, T mac_y);*/
+	// Attempt to suppress (ignore) generating PACKET_OUT response to PACKET_IN;
 	public abstract <T> void blockMAC(T mac);
+	public abstract <T> void blockIPv4(T ipv4);
+
+	// Redirection
+	public abstract <T> void redirectMAC(T src,T dst);
+	public abstract <T> void redirectIPv4(T src,T dst);
 
 	//</editor-fold>
 

@@ -169,6 +169,20 @@ public class FP_LibONOS extends AFP_Generic {
                 .withPriority(128) //integer value
                 .makeTemporary(60) //expiration (optional)
                 .add());
+    }
+
+    @Override
+    public <T> void blockIPv4(T ipv4) {
+        // Match on IPv4 and install a dropper rule.
+    }
+
+    @Override
+    public <T> void redirectMAC(T src, T dst) {
+
+    }
+
+    @Override
+    public <T> void redirectIPv4(T src, T dst) {
 
     }
 }

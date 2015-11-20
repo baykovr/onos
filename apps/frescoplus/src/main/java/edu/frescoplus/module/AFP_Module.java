@@ -57,7 +57,7 @@ public abstract class AFP_Module {
 			return true;
 		}
 	}
-	
+
 	public abstract void run();
 	
 	public class Port <T>
@@ -72,6 +72,11 @@ public abstract class AFP_Module {
 		public Port(T data)
 		{
 			this.data = data;
+		}
+
+		public boolean Empty()
+		{
+			return (data == null);
 		}
 	}
 }

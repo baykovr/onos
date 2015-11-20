@@ -1,6 +1,10 @@
 package edu.frescoplus.database;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -13,19 +17,39 @@ import java.util.stream.Stream;
  * 1. DB Streams, packets,events and app data
  * 2. DB Stream Selectors/Filters (lambdas)
  *
+ * // packets, events and app data
  */
 public class FP_DB
 {
-    public ArrayList<FP_DBEntry> data;
+
+
+    public ArrayList<String> packets;
+    public ArrayList<String> events;
+    public HashMap<String,ArrayList<FP_DBEntry>> app_tables;
 
     public FP_DB()
     {
-        data = new ArrayList<FP_DBEntry>();
+        packets = new ArrayList<String>();
+
+        events  = new ArrayList<String>();
+
+        app_tables = new HashMap<String, ArrayList<FP_DBEntry> >();
+    }
+    public void makeTable(String id, ArrayList<FP_DBEntry> content )
+    {
+        app_tables.put(id, content);
     }
 
-    public <T> Stream<T> select()
+    public ArrayList<String> getTableAsStringArray(String tableName)
     {
-        //return data.stream().filter( p -> System.out.println(p) );
-        return null;
+        ArrayList<FP_DBEntry> table = app_tables.get(tableName);
+
+        ArrayList<String> stringTable = new ArrayList<String>();
+
+        for (FP_DBEntry entry : table)
+        {
+            stringTable.add(entry.toString());
+        }
+        return stringTable;
     }
 }

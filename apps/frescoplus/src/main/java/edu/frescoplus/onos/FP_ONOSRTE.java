@@ -32,6 +32,8 @@ import org.onosproject.net.packet.PacketService;
 import org.slf4j.LoggerFactory;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Component(immediate = true)
@@ -106,7 +108,6 @@ public class FP_ONOSRTE extends AFP_RTE {
     @Override
     public void exec() {
         // Do custom operations (ONOS)
-        library.log.info( library.db.data.get(0).data.toString() );
 
         // Execute AFP RTE Applications
         //super.exec();
@@ -114,31 +115,36 @@ public class FP_ONOSRTE extends AFP_RTE {
 
     public void addStaticApp()
     {
-        //String name, String mainModule ,HashMap<String,AFP_Module modules
+        //ArrayList<String> blocklist = new ArrayList<String>();
+        //library.db .makeTable("MAC-BLACKLIST",blacklist);
+
         HashMap<String,AFP_Module> modules = new HashMap<String,AFP_Module>();
 
-        // This test app has a single module, next is null since this is the one and only module
+        // Get new Packet
+        FPM_procNewFlow procFlow  = new FPM_procNewFlow("NEW_FLOW","SRC_MAC_SELECTOR",super.library);
 
-        FPM_procNewFlow getter  = new FPM_procNewFlow("Get_Source_Host","Print_Source",super.library);
+        // Select packets of type ETH, extract source address
+        FPM_pktFieldSelector selector = new FPM_pktFieldSelector("SRC_MAC_SELECTOR","DB_CHECK",super.library,
+                procFlow.out_ports.get(0),"ETH","SRC_ADDR");
 
-        FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
-                getter.out_ports.get(0));
+        //FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
+        //        getter.out_ports.get(0));
 
-        FP_BlacklistModule blacklist = new FP_BlacklistModule("Blacklist_Check","Dropper",super.library,
-                getter.out_ports.get(0),
+        FPM_Blacklist blacklist = new FPM_Blacklist("DB_CHECK","DROP",super.library,
+                selector.out_ports.get(0),
                 null );
-        blacklist.addBlackItem("10.0.0.1");
+        // blacklist needs a binder
+        blacklist.bindBlackList( library.db.getTableAsStringArray("MAC-BLACKLIST"));
 
-        FP_DropperModule dropper = new FP_DropperModule("Dropper",null,super.library,
-                blacklist.out_ports.get(0));
+        FPM_doBlock blocker = new FPM_doBlock("DROP",null,super.library,
+                "MAC",blacklist.out_ports.get(0));
 
-        modules.put(getter.getName(),getter);
-        modules.put(printer.getName(),printer);
+        modules.put(procFlow.getName(),procFlow);
+        modules.put(selector.getName(),selector);
         modules.put(blacklist.getName(),blacklist);
-        modules.put(dropper.getName(),dropper);
+        modules.put(blocker.getName(),blocker);
 
-        FPM_Graph testApp = new FPM_Graph("static-app-test",getter.getName(),modules);
-
+        FPM_Graph testApp = new FPM_Graph("static-app-test",procFlow.getName(),modules);
         super.fpApps.add(testApp);
     }
     //</editor-fold>

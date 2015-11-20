@@ -2,9 +2,6 @@ package edu.frescoplus.database;
 
 import java.util.function.Predicate;
 
-/**
- * Created by baykovr on 11/10/15.
- */
 public class FP_DBEntry<K>
 {
     public K identifier;
@@ -14,5 +11,10 @@ public class FP_DBEntry<K>
     {
         this.identifier = identifier;
         this.data = data;
+    }
+
+    public static String toString(FP_DBEntry entry)
+    {
+        return entry.data.toString();
     }
 }
