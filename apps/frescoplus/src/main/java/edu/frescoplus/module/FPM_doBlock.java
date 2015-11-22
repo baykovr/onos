@@ -38,7 +38,7 @@ public class FPM_doBlock extends AFP_Module {
 			}
 			else if (dataType == "IPv4")
 			{
-				library.blockIPv4(data.data);
+				library.blockIPv4();
 			}
 			else
 			{

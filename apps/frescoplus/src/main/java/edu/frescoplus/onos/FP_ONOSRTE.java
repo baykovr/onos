@@ -16,6 +16,8 @@
 package edu.frescoplus.onos;
 
 import edu.frescoplus.module.*;
+import edu.frescoplus.module.legacy.FM_do_action;
+import edu.frescoplus.module.legacy.botminer.FP_a_cluster;
 import edu.frescoplus.runtime.AFP_RTE;
 
 import edu.frescoplus.runtime.FPM_Graph;
@@ -129,6 +131,9 @@ public class FP_ONOSRTE extends AFP_RTE {
 
         //FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
         //        getter.out_ports.get(0));
+
+        AFP_Module.Port<Boolean> test = new AFP_Module.Port<Boolean>();
+        FM_do_action action = new FM_do_action("DO","HAST",library,test);
 
         FPM_Blacklist blacklist = new FPM_Blacklist("DB_CHECK","DROP",super.library,
                 selector.out_ports.get(0),

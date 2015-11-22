@@ -22,8 +22,8 @@ public abstract class AFP_Module {
 	final String name; // must be unique.
 	String next; 
 	
-	AFP_Generic library;
-	
+	protected AFP_Generic library;
+
 	public ArrayList<Port> in_ports;
 	public ArrayList<Port> out_ports;
 	
@@ -36,7 +36,12 @@ public abstract class AFP_Module {
 		in_ports  = new ArrayList<Port>();
 		out_ports = new ArrayList<Port>();
 	}
-	
+
+	public void setNext(String next)
+	{
+		this.next = next;
+	}
+
 	public String getNext()
 	{
 		return next;
@@ -59,16 +64,16 @@ public abstract class AFP_Module {
 	}
 
 	public abstract void run();
-	
-	public class Port <T>
+
+	public static class Port <T>
 	{
-		T data;
+		public T data;
 
 		public Port()
 		{
 			this.data = null;
 		}
-		
+
 		public Port(T data)
 		{
 			this.data = data;
