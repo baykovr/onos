@@ -19,14 +19,15 @@ import java.net.Inet4Address;
  * this is the malicious case, the other cluster is benign (normal hosts).
  * We return the two clusters for cross clustering analysis (uses a plane and c plane to find malicious)
  */
-public class FP_c_cluster extends AFP_Module
+public class FM_c_cluster extends AFP_Module
 {
-    public FP_c_cluster(String name, String next, AFP_Generic library,
-                        Port<Inet4Address> src, Port<Inet4Address> dst)
+    int src,dst;
+    public FM_c_cluster(String name, AFP_Generic library,
+                        int src, int dst)
     {
-        super(name, next, library);
-
-
+        super(name, library);
+        this.src = src;
+        this.dst = dst;
     }
 
     public void clusterStatistics()
@@ -38,7 +39,6 @@ public class FP_c_cluster extends AFP_Module
     {
         // #packets & #bytes between hosts.
         // ask lib for statistics information from flow table.
-
 
     }
     @Override

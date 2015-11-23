@@ -21,8 +21,6 @@ import java.util.stream.Stream;
  */
 public class FP_DB
 {
-
-
     public ArrayList<String> packets;
     public ArrayList<String> events;
     public HashMap<String,ArrayList<FP_DBEntry>> app_tables;

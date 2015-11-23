@@ -15,9 +15,9 @@
  */
 package edu.frescoplus.onos;
 
-import edu.frescoplus.module.*;
+import edu.frescoplus.module.legacy.FM_blacklist_check;
 import edu.frescoplus.module.legacy.FM_do_action;
-import edu.frescoplus.module.legacy.botminer.FP_a_cluster;
+import edu.frescoplus.module.legacy.FM_select;
 import edu.frescoplus.runtime.AFP_RTE;
 
 import edu.frescoplus.runtime.FPM_Graph;
@@ -32,11 +32,6 @@ import org.onosproject.net.packet.PacketPriority;
 import org.onosproject.net.packet.PacketProcessor;
 import org.onosproject.net.packet.PacketService;
 import org.slf4j.LoggerFactory;
-
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 @Component(immediate = true)
 public class FP_ONOSRTE extends AFP_RTE {
@@ -69,12 +64,12 @@ public class FP_ONOSRTE extends AFP_RTE {
     // Selector for ICMP traffic that is to be intercepted
     private final TrafficSelector intercept = DefaultTrafficSelector.builder()
             .matchEthType(Ethernet.TYPE_IPV4).build();
-    //we can also select by ICMP
+    //we can also select by ICMP or TCP, etc etc.
     //matchIPProtocol(IPv4.ICMP).build
     //</editor-fold>
 
 
-    //private final PacketProcessor packetProcessor = new PingPacketProcessor();
+    private FP_libONOS library;
     //private final FlowRuleListener flowListener = new InternalFlowListener();
 
 
@@ -89,7 +84,7 @@ public class FP_ONOSRTE extends AFP_RTE {
         packetService.requestPackets(intercept, PacketPriority.REACTIVE, appId);
 
         // Instantiate the generic function library with our ONOS function binding imlementation.
-        library = new FP_LibONOS(LoggerFactory.getLogger( getClass() ));
+        library = new FP_libONOS(LoggerFactory.getLogger( getClass() ));
 
         addStaticApp();
 
@@ -112,45 +107,26 @@ public class FP_ONOSRTE extends AFP_RTE {
         // Do custom operations (ONOS)
 
         // Execute AFP RTE Applications
-        //super.exec();
+        super.exec();
     }
 
     public void addStaticApp()
     {
-        //ArrayList<String> blocklist = new ArrayList<String>();
-        //library.db .makeTable("MAC-BLACKLIST",blacklist);
+        FPM_Graph scanDetector = new FPM_Graph("scan-detector");
 
-        HashMap<String,AFP_Module> modules = new HashMap<String,AFP_Module>();
+        FM_select ip_selector = new FM_select("ip-selector",library,
+                "srcIP");
+        FM_blacklist_check blacklist = new FM_blacklist_check("ip-blacklist",library,
+                ip_selector.result);
 
-        // Get new Packet
-        FPM_procNewFlow procFlow  = new FPM_procNewFlow("NEW_FLOW","SRC_MAC_SELECTOR",super.library);
+        FM_do_action dropper = new FM_do_action("dropper",library,
+                blacklist.result);
 
-        // Select packets of type ETH, extract source address
-        FPM_pktFieldSelector selector = new FPM_pktFieldSelector("SRC_MAC_SELECTOR","DB_CHECK",super.library,
-                procFlow.out_ports.get(0),"ETH","SRC_ADDR");
+        scanDetector.addModule(ip_selector);
+        scanDetector.addModule(blacklist);
+        scanDetector.addModule(dropper);
 
-        //FP_LoggingModule printer = new FP_LoggingModule("Print_Source","Blacklist_Check",super.library,
-        //        getter.out_ports.get(0));
-
-        AFP_Module.Port<Boolean> test = new AFP_Module.Port<Boolean>();
-        FM_do_action action = new FM_do_action("DO","HAST",library,test);
-
-        FPM_Blacklist blacklist = new FPM_Blacklist("DB_CHECK","DROP",super.library,
-                selector.out_ports.get(0),
-                null );
-        // blacklist needs a binder
-        blacklist.bindBlackList( library.db.getTableAsStringArray("MAC-BLACKLIST"));
-
-        FPM_doBlock blocker = new FPM_doBlock("DROP",null,super.library,
-                "MAC",blacklist.out_ports.get(0));
-
-        modules.put(procFlow.getName(),procFlow);
-        modules.put(selector.getName(),selector);
-        modules.put(blacklist.getName(),blacklist);
-        modules.put(blocker.getName(),blocker);
-
-        FPM_Graph testApp = new FPM_Graph("static-app-test",procFlow.getName(),modules);
-        super.fpApps.add(testApp);
+        super.fpApps.add(scanDetector);
     }
     //</editor-fold>
 // ---------------------------------------------------------------------------------------------------------------------
@@ -160,6 +136,7 @@ public class FP_ONOSRTE extends AFP_RTE {
         public void process(PacketContext context)
         {
             library.log.info("Got a packet!");
+            library.setContext(appId,context,flowObjectiveService,flowRuleService);
             exec();
 
             // traffic filter grantees IPv4

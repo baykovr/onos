@@ -5,23 +5,22 @@ import edu.frescoplus.module.AFP_Module;
 
 import java.net.Inet4Address;
 
-public class FM_do_reflect <T,U>  extends AFP_Module{
-    public FM_do_reflect(String name, String next, AFP_Generic library,
-                         T scanResult, U sourceIP)
+public class FM_do_reflect extends AFP_Module{
+    boolean doReflect;
+    public FM_do_reflect(String name,AFP_Generic library, boolean doReflect)
     {
-        super(name, next, library);
-        library.redirectMAC(scanResult,scanResult);
+        super(name, library);
+        this.doReflect = doReflect;
     }
     @Override
     public void run() {
-        if( (Boolean)in_ports.get(0).data )
+        if(doReflect)
         {
-            //library.reflectIPv4( in_ports.get(1) );
+            library.MIRROR();
         }
         else
         {
-            //fwd
+            library.FORWARD();
         }
-
     }
 }

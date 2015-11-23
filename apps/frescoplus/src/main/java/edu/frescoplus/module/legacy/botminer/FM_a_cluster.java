@@ -19,18 +19,13 @@ import java.net.Inet4Address;
 * Concretely, input in an IP address we wish to analyze.
 * Output is the ip address and score.
 * */
-public class FP_a_cluster extends AFP_Module{
+public class FM_a_cluster extends AFP_Module{
 
     Integer score_threshold = 5;
 
-    public FP_a_cluster(String name, String next, AFP_Generic library,
-                        Port<Inet4Address> ipv4, Port<Integer> score)
+    public FM_a_cluster(String name, String next, AFP_Generic library)
     {
-        super(name, next, library);
-
-        in_ports.add(ipv4);
-        out_ports.add(score);
-
+        super(name,library);
     }
 
     public Integer getExternalAScore(Inet4Address address)
@@ -43,16 +38,8 @@ public class FP_a_cluster extends AFP_Module{
     }
 
     @Override
-    public void run() {
-
-        if ( getExternalAScore( (Inet4Address) in_ports.get(0).data ) > score_threshold)
-        {
-            out_ports.get(0).data = in_ports.get(0).data;
-        }
-        else
-        {
-            out_ports.get(0).data = null;
-        }
+    public void run()
+    {
 
     }
 }

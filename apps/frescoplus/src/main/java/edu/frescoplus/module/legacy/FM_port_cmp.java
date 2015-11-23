@@ -10,27 +10,28 @@ import edu.frescoplus.module.AFP_Module;
  *
  */
 public class FM_port_cmp extends AFP_Module {
-    Integer port;
+    public int port;
+    public boolean result;
 
-    public FM_port_cmp(String name, String next, AFP_Generic library,
-                       Integer port, Port<Boolean> result)
+    public FM_port_cmp(String name, AFP_Generic library,
+                       int port)
     {
-        super(name,next,library);
-        out_ports.add(result);
+        super(name,library);
+        this.port = port;
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         // grab a packet and check the TCP port.
         // implying TCP packet.
         if ( library.isTCP() )
         {
-                out_ports.get(0).data = ( port == (Integer) library.getDstPort() );
+            result = (library.getDstPort() == port);
         }
         else
         {
-            // Abort execution, since this packet does not match.
-            super.setNext(null);
+            result = false;
         }
     }
 }
