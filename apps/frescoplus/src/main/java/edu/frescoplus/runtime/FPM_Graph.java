@@ -1,24 +1,26 @@
 package edu.frescoplus.runtime;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import edu.frescoplus.module.AFP_Module;
 
-// Defines in which order we will execute fp modules
-// Holds references to all modules.
+/*
+* Defines in which order we will execute fp modules
+* Holds references to all modules.
+* Using only a Single Entry point, i.e. a single module is marked as the entry
+* point for the program.
+* */
 
-// Using only a Single Entry point, i.e. a single module is marked as the entry 
-// point for the program. 
-
-public class FPM_Graph {
+public class FPM_Graph implements Iterable<AFP_Module>{
 	public final String name;
 
-	ArrayList<AFP_Module> modules;
+	private ArrayList<AFP_Module> modules;
 
 	public FPM_Graph(String name) {
 		assert (modules.size() > 0);
 		this.name = name;
-		this.modules = new ArrayList<>();
+		this.modules = new ArrayList<AFP_Module>();
 	}
 
 	public void addModule(AFP_Module module) {
@@ -29,6 +31,11 @@ public class FPM_Graph {
 		for (AFP_Module module : modules) {
 			module.run();
 		}
+	}
+
+	@Override
+	public Iterator<AFP_Module> iterator() {
+		return modules.iterator();
 	}
 }
 // Base case.

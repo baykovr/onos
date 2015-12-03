@@ -1,8 +1,11 @@
 package edu.frescoplus.database;
 
+import edu.frescoplus.util.HostConnection;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,19 +18,22 @@ import java.util.stream.Stream;
  *
  * TODO
  * 1. DB Streams, packets,events and app data
- * 2. DB Stream Selectors/Filters (lambdas)
+ * 2. DB Stream Selectors/Filters
  *
- * // packets, events and app data
+ * packets, events and app data
  */
+
 public class FP_DB
 {
-    public ArrayList<String> packets;
+    public HashSet<Integer> connections;
+
     public ArrayList<String> events;
+
     public HashMap<String,ArrayList<FP_DBEntry>> app_tables;
 
     public FP_DB()
     {
-        packets = new ArrayList<String>();
+        connections = new HashSet<Integer>();
 
         events  = new ArrayList<String>();
 

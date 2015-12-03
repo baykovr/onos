@@ -24,7 +24,8 @@ public abstract class AFP_Generic
 	}
 	//</editor-fold>
 
-	/*New Model Section*/
+
+	// Packet Abstractions
 	public abstract boolean isIPv4();
 
 	public abstract boolean isICMP();
