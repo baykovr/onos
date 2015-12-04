@@ -1,7 +1,7 @@
-package edu.frescoplus.module.legacy.botminer;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 import java.util.ArrayList;
 
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 * High score if hosts performs multiple types of a plane activity and if
 * other c plane hosts (related) have high scores.
 * */
-public class FM_cr_cluster<T> extends AFP_Module{
+public class FM_cr_cluster<T> extends AFP_Module {
 
-    public FM_cr_cluster(String name, AFP_Generic library,
+    public FM_cr_cluster(String name, AFP_Library library,
                          ArrayList<T> leftSet, ArrayList<T> rightSet)
     {
         super(name,library);

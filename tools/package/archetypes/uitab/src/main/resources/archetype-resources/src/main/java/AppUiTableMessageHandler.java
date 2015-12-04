@@ -147,7 +147,7 @@ public class AppUiTableMessageHandler extends UiMessageHandler {
 
     // ===================================================================
     // NOTE: The code below this line is to create fake data for this
-    //       sample code. Normally you would use existing services to
+    //       sample code. Normally you would use existing service to
     //       provide real data.
 
     // Lookup a single item.

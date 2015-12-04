@@ -1,9 +1,7 @@
-package edu.frescoplus.module.legacy.botminer;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
-
-import java.net.Inet4Address;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 /**
  * C Plane, who is communicating with whom (TCP and UDP flows)
@@ -22,7 +20,7 @@ import java.net.Inet4Address;
 public class FM_c_cluster extends AFP_Module
 {
     int src,dst;
-    public FM_c_cluster(String name, AFP_Generic library,
+    public FM_c_cluster(String name, AFP_Library library,
                         int src, int dst)
     {
         super(name, library);

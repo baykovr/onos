@@ -59,7 +59,7 @@ import static org.onosproject.security.AppPermission.Type.*;
 
 /**
  * Provides implementation of a path selection service atop the current
- * topology and host services.
+ * topology and host service.
  */
 @Component(immediate = true)
 @Service

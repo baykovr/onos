@@ -37,7 +37,7 @@ import org.onosproject.rest.AbstractWebResource;
 import org.slf4j.Logger;
 
 /**
- * REST services to interact with the virtual BNG.
+ * REST service to interact with the virtual BNG.
  */
 @Path("privateip")
 public class VbngResource extends AbstractWebResource {

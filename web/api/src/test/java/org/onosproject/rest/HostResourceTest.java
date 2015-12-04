@@ -81,7 +81,7 @@ public class HostResourceTest extends ResourceTest {
     public void setUpTest() {
         expect(mockHostService.getHosts()).andReturn(hosts).anyTimes();
 
-        // Register the services needed for the test
+        // Register the service needed for the test
         final CodecManager codecService =  new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

@@ -15,6 +15,6 @@
  */
 
 /**
- * Infrastructure link model &amp; related services API definitions.
+ * Infrastructure link model &amp; related service API definitions.
  */
 package org.onosproject.net.link;

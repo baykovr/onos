@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * A schema for the database represented by database-schema, which consists of
+ * A schema for the storage represented by storage-schema, which consists of
  * a set of tables.
  */
 public final class DatabaseSchema {
@@ -34,8 +34,8 @@ public final class DatabaseSchema {
 
     /**
      * Constructs a DatabaseSchema object.
-     * @param name the name of database
-     * @param version the version of database
+     * @param name the name of storage
+     * @param version the version of storage
      * @param tableSchemas a map of TableSchema
      */
     public DatabaseSchema(String name, String version,
@@ -49,16 +49,16 @@ public final class DatabaseSchema {
     }
 
     /**
-     * Returns the name of database.
-     * @return the name of database
+     * Returns the name of storage.
+     * @return the name of storage
      */
     public String name() {
         return name;
     }
 
     /**
-     * Returns the version of database.
-     * @return the version of database
+     * Returns the version of storage.
+     * @return the version of storage
      */
     public String version() {
         return version;

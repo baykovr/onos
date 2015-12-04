@@ -59,7 +59,7 @@ public class NodeSelection {
 
     /**
      * Creates a node selection entity, from the given payload, using the
-     * supplied device and host services. Note that if a device or host was
+     * supplied device and host service. Note that if a device or host was
      * hovered over by the mouse, it is available via {@link #hovered()}.
      *
      * @param payload message payload

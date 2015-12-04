@@ -1,7 +1,7 @@
-package edu.frescoplus.module.legacy.botminer;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 import java.net.Inet4Address;
 
@@ -19,11 +19,11 @@ import java.net.Inet4Address;
 * Concretely, input in an IP address we wish to analyze.
 * Output is the ip address and score.
 * */
-public class FM_a_cluster extends AFP_Module{
+public class FM_a_cluster extends AFP_Module {
 
     Integer score_threshold = 5;
 
-    public FM_a_cluster(String name, String next, AFP_Generic library)
+    public FM_a_cluster(String name, String next, AFP_Library library)
     {
         super(name,library);
     }

@@ -107,7 +107,7 @@ public enum IntentState {
     CORRUPT, //TODO consider renaming to ERROR
 
     /**
-     * Indicates that the intent should be purged from the database.
+     * Indicates that the intent should be purged from the storage.
      * <p>
      * Note: This operation will only be performed if the intent is already
      * in WITHDRAWN or FAILED.

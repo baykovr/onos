@@ -26,7 +26,7 @@ import org.onosproject.ovsdb.rfc.notation.json.OvsdbMapSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
- * OvsdbMap is a 2-element JSON array that represents a database map value.
+ * OvsdbMap is a 2-element JSON array that represents a storage map value.
  */
 @JsonSerialize(using = OvsdbMapSerializer.class)
 public final class OvsdbMap {

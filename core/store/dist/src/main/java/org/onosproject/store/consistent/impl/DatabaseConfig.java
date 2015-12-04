@@ -33,8 +33,8 @@ import java.util.Map;
 public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   private static final String DATABASE_CONSISTENCY = "consistency";
 
-  private static final String DEFAULT_CONFIGURATION = "database-defaults";
-  private static final String CONFIGURATION = "database";
+  private static final String DEFAULT_CONFIGURATION = "storage-defaults";
+  private static final String CONFIGURATION = "storage";
 
   private String name;
 
@@ -60,9 +60,9 @@ public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   }
 
   /**
-   * Sets the database read consistency.
+   * Sets the storage read consistency.
    *
-   * @param consistency The database read consistency.
+   * @param consistency The storage read consistency.
    * @throws java.lang.NullPointerException If the consistency is {@code null}
    */
   public void setConsistency(String consistency) {
@@ -72,9 +72,9 @@ public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   }
 
   /**
-   * Sets the database read consistency.
+   * Sets the storage read consistency.
    *
-   * @param consistency The database read consistency.
+   * @param consistency The storage read consistency.
    * @throws java.lang.NullPointerException If the consistency is {@code null}
    */
   public void setConsistency(Consistency consistency) {
@@ -84,19 +84,19 @@ public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   }
 
   /**
-   * Returns the database read consistency.
+   * Returns the storage read consistency.
    *
-   * @return The database read consistency.
+   * @return The storage read consistency.
    */
   public Consistency getConsistency() {
     return Consistency.parse(config.getString(DATABASE_CONSISTENCY));
   }
 
   /**
-   * Sets the database read consistency, returning the configuration for method chaining.
+   * Sets the storage read consistency, returning the configuration for method chaining.
    *
-   * @param consistency The database read consistency.
-   * @return The database configuration.
+   * @param consistency The storage read consistency.
+   * @return The storage configuration.
    * @throws java.lang.NullPointerException If the consistency is {@code null}
    */
   public DatabaseConfig withConsistency(String consistency) {
@@ -105,10 +105,10 @@ public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   }
 
   /**
-   * Sets the database read consistency, returning the configuration for method chaining.
+   * Sets the storage read consistency, returning the configuration for method chaining.
    *
-   * @param consistency The database read consistency.
-   * @return The database configuration.
+   * @param consistency The storage read consistency.
+   * @return The storage configuration.
    * @throws java.lang.NullPointerException If the consistency is {@code null}
    */
   public DatabaseConfig withConsistency(Consistency consistency) {
@@ -117,19 +117,19 @@ public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   }
 
   /**
-   * Returns the database name.
+   * Returns the storage name.
    *
-   * @return The database name
+   * @return The storage name
    */
   public String getName() {
       return name;
   }
 
   /**
-   * Sets the database name, returning the configuration for method chaining.
+   * Sets the storage name, returning the configuration for method chaining.
    *
-   * @param name The database name
-   * @return The database configuration
+   * @param name The storage name
+   * @return The storage configuration
    * @throws java.lang.NullPointerException If the name is {@code null}
    */
   public DatabaseConfig withName(String name) {
@@ -138,9 +138,9 @@ public class DatabaseConfig extends ResourceConfig<DatabaseConfig> {
   }
 
   /**
-   * Sets the database name.
+   * Sets the storage name.
    *
-   * @param name The database name
+   * @param name The storage name
    * @throws java.lang.NullPointerException If the name is {@code null}
    */
   public void setName(String name) {

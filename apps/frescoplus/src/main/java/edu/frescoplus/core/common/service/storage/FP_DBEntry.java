@@ -1,6 +1,4 @@
-package edu.frescoplus.database;
-
-import java.util.function.Predicate;
+package edu.frescoplus.core.common.service.storage;
 
 public class FP_DBEntry<K>
 {

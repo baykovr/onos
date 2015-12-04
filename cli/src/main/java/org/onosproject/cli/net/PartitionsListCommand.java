@@ -28,7 +28,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Command to list the database partitions in the system.
+ * Command to list the storage partitions in the system.
  */
 @Command(scope = "onos", name = "partitions",
         description = "Lists information about partitions in the system")

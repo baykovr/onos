@@ -15,6 +15,6 @@
  */
 
 /**
- * End-station host model &amp; related services API definitions.
+ * End-station host model &amp; related service API definitions.
  */
 package org.onosproject.net.host;

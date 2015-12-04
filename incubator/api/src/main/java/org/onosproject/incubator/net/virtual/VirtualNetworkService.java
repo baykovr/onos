@@ -68,7 +68,7 @@ public interface VirtualNetworkService {
      * Returns implementation of the specified service class for operating
      * in the context of the given network.
      * <p>
-     * The following services will be available:
+     * The following service will be available:
      * <ul>
      * <li>{@link org.onosproject.net.device.DeviceService}</li>
      * <li>{@link org.onosproject.net.link.LinkService}</li>

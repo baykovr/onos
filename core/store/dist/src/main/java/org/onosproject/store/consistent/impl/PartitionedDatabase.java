@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 import static com.google.common.base.Preconditions.checkState;
 
 /**
- * A database that partitions the keys across one or more database partitions.
+ * A storage that partitions the keys across one or more storage partitions.
  */
 public class PartitionedDatabase implements Database {
 
@@ -66,14 +66,14 @@ public class PartitionedDatabase implements Database {
 
     /**
      * Returns the databases for individual partitions.
-     * @return list of database partitions
+     * @return list of storage partitions
      */
     public List<Database> getPartitions() {
         return partitions;
     }
 
     /**
-     * Returns true if the database is open.
+     * Returns true if the storage is open.
      * @return true if open, false otherwise
      */
     @Override

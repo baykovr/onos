@@ -56,7 +56,7 @@ public class MockCodecContext implements CodecContext {
         return (T) services.get(serviceClass);
     }
 
-    // for registering mock services
+    // for registering mock service
     public <T> void registerService(Class<T> serviceClass, T impl) {
         services.put(serviceClass, impl);
     }

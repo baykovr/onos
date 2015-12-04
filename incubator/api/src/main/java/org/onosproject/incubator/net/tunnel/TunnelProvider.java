@@ -22,7 +22,7 @@ import org.onosproject.net.Path;
 import org.onosproject.net.provider.Provider;
 
 /**
- * Abstraction of an entity providing tunnel setup/release services to the core.
+ * Abstraction of an entity providing tunnel setup/release service to the core.
  */
 @Beta
 public interface TunnelProvider extends Provider {

@@ -29,7 +29,7 @@ public final class OvsdbConstant {
     private OvsdbConstant() {
     }
 
-    /** Ovsdb database Open_vSwitch. */
+    /** Ovsdb storage Open_vSwitch. */
     public static final String DATABASENAME = "Open_vSwitch";
 
     /** Ovsdb table Bridge. */

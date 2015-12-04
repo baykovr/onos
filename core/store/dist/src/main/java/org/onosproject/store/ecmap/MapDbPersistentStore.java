@@ -43,7 +43,7 @@ class MapDbPersistentStore<K, V> implements PersistentStore<K, V> {
     /**
      * Creates a new MapDB based persistent store.
      *
-     * @param filename filename of the database on disk
+     * @param filename filename of the storage on disk
      * @param executor executor to use for tasks that write to the disk
      * @param serializer serializer for keys and values
      */

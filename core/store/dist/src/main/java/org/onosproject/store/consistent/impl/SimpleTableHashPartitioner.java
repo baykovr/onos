@@ -23,7 +23,7 @@ import java.util.List;
  * pick a partition.
  * <p>
  * This class uses a md5 hash based hashing scheme for hashing the map name to
- * a partition. This partitioner maps all keys for a map to the same database
+ * a partition. This partitioner maps all keys for a map to the same storage
  * partition.
  */
 public class SimpleTableHashPartitioner extends DatabasePartitioner {

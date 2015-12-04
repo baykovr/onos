@@ -17,7 +17,7 @@ package org.onosproject.net.group;
 
 /**
  * Representation of generalized Key that would be used to store
- * groups in &lt; Key, Value &gt; store. This key uses a generic
+ * groups in &lt; Key, Value &gt; store. This key uses a common
  * byte array so that applications can associate their groups with
  * any of their data by translating it into a byte array.
  */

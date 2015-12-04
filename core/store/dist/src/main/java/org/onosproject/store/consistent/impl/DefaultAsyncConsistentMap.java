@@ -52,7 +52,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * AsyncConsistentMap implementation that is backed by a Raft consensus
- * based database.
+ * based storage.
  *
  * @param <K> type of key.
  * @param <V> type of value.
@@ -115,7 +115,7 @@ public class DefaultAsyncConsistentMap<K, V>  implements AsyncConsistentMap<K, V
                                      boolean meteringEnabled) {
         this.name = checkNotNull(name, "map name cannot be null");
         this.applicationId = applicationId;
-        this.database = checkNotNull(database, "database cannot be null");
+        this.database = checkNotNull(database, "storage cannot be null");
         this.serializer = checkNotNull(serializer, "serializer cannot be null");
         this.readOnly = readOnly;
         this.purgeOnUninstall = purgeOnUninstall;

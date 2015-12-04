@@ -231,7 +231,7 @@ public class StatisticManager implements StatisticService {
         }
     }
 
-    // TODO: make aggregation function generic by passing a function
+    // TODO: make aggregation function common by passing a function
     // (applying Java 8 Stream API?)
     /**
      * Aggregates a set of values.

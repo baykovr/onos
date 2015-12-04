@@ -180,7 +180,7 @@ public class ApplicationsResourceTest extends ResourceTest {
                 .andReturn(ApplicationState.ACTIVE)
                 .anyTimes();
 
-        // Register the services needed for the test
+        // Register the service needed for the test
         CodecManager codecService = new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

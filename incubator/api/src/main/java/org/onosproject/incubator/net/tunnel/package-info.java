@@ -15,6 +15,6 @@
  */
 
 /**
- * Tunnel model related services and providers API definitions.
+ * Tunnel model related service and providers API definitions.
  */
 package org.onosproject.incubator.net.tunnel;

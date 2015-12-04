@@ -35,7 +35,7 @@ import java.util.Set;
 public interface DatabaseState<K, V> {
 
   /**
-   * Initializes the database state.
+   * Initializes the storage state.
    *
    * @param context The map state context.
    */

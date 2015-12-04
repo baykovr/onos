@@ -19,13 +19,13 @@ import org.onlab.osgi.ServiceDirectory;
 import org.onosproject.net.flowobjective.FlowObjectiveStore;
 
 /**
- * Processing context and supporting services for the pipeline behaviour.
+ * Processing context and supporting service for the pipeline behaviour.
  */
 public interface PipelinerContext {
 
     /**
      * Returns the service directory which can be used to obtain references
-     * to various supporting services.
+     * to various supporting service.
      *
      * @return service directory
      */

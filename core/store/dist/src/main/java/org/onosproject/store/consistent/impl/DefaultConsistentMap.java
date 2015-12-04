@@ -35,7 +35,7 @@ import org.onosproject.store.service.Versioned;
 
 /**
  * ConsistentMap implementation that is backed by a Raft consensus
- * based database.
+ * based storage.
  *
  * @param <K> type of key.
  * @param <V> type of value.

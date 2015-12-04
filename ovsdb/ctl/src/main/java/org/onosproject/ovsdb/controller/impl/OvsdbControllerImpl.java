@@ -210,7 +210,7 @@ public class OvsdbControllerImpl implements OvsdbController {
      *
      * @param clientService OvsdbClientService instance
      * @param updates       TableUpdates instance
-     * @param dbName        ovsdb database name
+     * @param dbName        ovsdb storage name
      */
     private void processTableUpdates(OvsdbClientService clientService,
                                      TableUpdates updates, String dbName)
@@ -257,7 +257,7 @@ public class OvsdbControllerImpl implements OvsdbController {
      * @param newRow        a new row
      * @param oldRow        an old row
      * @param eventType     type of event
-     * @param dbSchema      ovsdb database schema
+     * @param dbSchema      ovsdb storage schema
      */
     private void dispatchInterfaceEvent(OvsdbClientService clientService,
                                         Row row,
@@ -348,7 +348,7 @@ public class OvsdbControllerImpl implements OvsdbController {
      * Gets datapathid from table bridge.
      *
      * @param clientService OvsdbClientService instance
-     * @param dbSchema      ovsdb database schema
+     * @param dbSchema      ovsdb storage schema
      * @return datapathid the bridge datapathid
      */
     private long getDataPathid(OvsdbClientService clientService,

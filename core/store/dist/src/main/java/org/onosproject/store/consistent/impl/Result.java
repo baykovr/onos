@@ -20,7 +20,7 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 import java.util.Objects;
 
 /**
- * Result of a database update operation.
+ * Result of a storage update operation.
  *
  * @param <V> return value type
  */
@@ -77,9 +77,9 @@ public final class Result<V> {
     }
 
     /**
-     * Returns the status of database update operation.
+     * Returns the status of storage update operation.
      *
-     * @return database update status
+     * @return storage update status
      */
     public Status status() {
         return status;
@@ -88,7 +88,7 @@ public final class Result<V> {
     /**
      * Returns the return value for the update.
      *
-     * @return value returned by database update. If the status is another
+     * @return value returned by storage update. If the status is another
      * other than Status.OK, this returns a null
      */
     public V value() {

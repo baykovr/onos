@@ -108,7 +108,7 @@ public class Data extends BasePacket {
     }
 
     /**
-     * Deserializer function for generic payload data.
+     * Deserializer function for common payload data.
      *
      * @return deserializer function
      */

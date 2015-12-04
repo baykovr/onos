@@ -29,23 +29,23 @@ import com.google.common.util.concurrent.ListenableFuture;
 public interface OvsdbRPC {
 
     /**
-     * This operation retrieves a database-schema that describes hosted database
+     * This operation retrieves a storage-schema that describes hosted storage
      * db-name.
-     * @param dbnames database name
+     * @param dbnames storage name
      * @return ListenableFuture of JsonNode
      */
     ListenableFuture<JsonNode> getSchema(List<String> dbnames);
 
     /**
      * The "echo" method can be used by both clients and servers to verify the
-     * liveness of a database connection.
+     * liveness of a storage connection.
      * @return return info
      */
     ListenableFuture<List<String>> echo();
 
     /**
      * The "monitor" request enables a client to replicate tables or subsets of
-     * tables within an OVSDB database by requesting notifications of changes to
+     * tables within an OVSDB storage by requesting notifications of changes to
      * those tables and by receiving the complete initial state of a table or a
      * subset of a table.
      * @param dbSchema databse schema
@@ -57,14 +57,14 @@ public interface OvsdbRPC {
     /**
      * This operation retrieves an array whose elements are the names of the
      * databases that can be accessed over this management protocol connection.
-     * @return database names
+     * @return storage names
      */
     ListenableFuture<List<String>> listDbs();
 
     /**
-     * This RPC method causes the database server to execute a series of
-     * operations in the specified order on a given database.
-     * @param dbSchema database schema
+     * This RPC method causes the storage server to execute a series of
+     * operations in the specified order on a given storage.
+     * @param dbSchema storage schema
      * @param operations the operations to execute
      * @return result the transact result
      */

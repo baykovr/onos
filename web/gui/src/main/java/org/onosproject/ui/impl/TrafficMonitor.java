@@ -107,7 +107,7 @@ public class TrafficMonitor {
      * Constructs a traffic monitor.
      *
      * @param trafficPeriod   traffic task period in ms
-     * @param servicesBundle  bundle of services
+     * @param servicesBundle  bundle of service
      * @param msgHandler  our message handler
      */
     public TrafficMonitor(long trafficPeriod, ServicesBundle servicesBundle,

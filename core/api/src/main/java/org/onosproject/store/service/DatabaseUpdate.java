@@ -29,7 +29,7 @@ import com.google.common.base.MoreObjects;
 public final class DatabaseUpdate {
 
     /**
-     * Type of database update operation.
+     * Type of storage update operation.
      */
     public enum Type {
         /**
@@ -107,15 +107,15 @@ public final class DatabaseUpdate {
     }
 
     /**
-     * Returns the expected current value in the database value for the key.
-     * @return current value in database.
+     * Returns the expected current value in the storage value for the key.
+     * @return current value in storage.
      */
     public byte[] currentValue() {
         return currentValue;
     }
 
     /**
-     * Returns the expected current version in the database for the key.
+     * Returns the expected current version in the storage for the key.
      * @return expected version.
      */
     public long currentVersion() {

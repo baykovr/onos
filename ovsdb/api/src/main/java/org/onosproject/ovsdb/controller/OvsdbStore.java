@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
 import com.google.common.collect.Maps;
 
 /**
- * The cache for local ovsdb database.
+ * The cache for local ovsdb storage.
  */
 public class OvsdbStore {
 
@@ -29,7 +29,7 @@ public class OvsdbStore {
     /**
      * Gets the OvsdbTableStore.
      *
-     * @param dbName ovsdb database name
+     * @param dbName ovsdb storage name
      * @return tableStore OvsdbTableStore
      */
     public OvsdbTableStore getOvsdbTableStore(String dbName) {
@@ -43,8 +43,8 @@ public class OvsdbStore {
     /**
      * Create or Update a value to ovsdbStore.
      *
-     * @param dbName ovsdb database name
-     * @param tableStore a database tableStore.
+     * @param dbName ovsdb storage name
+     * @param tableStore a storage tableStore.
      */
     public void createOrUpdateOvsdbStore(String dbName, OvsdbTableStore tableStore) {
         ovsdbStore.put(dbName, tableStore);
@@ -53,7 +53,7 @@ public class OvsdbStore {
     /**
      * Drops a value to rowStore.
      *
-     * @param dbName ovsdb database name
+     * @param dbName ovsdb storage name
      */
     public void dropOvsdbStore(String dbName) {
         ovsdbStore.remove(dbName);

@@ -125,7 +125,7 @@ public interface GroupStore extends Store<GroupEvent, GroupStoreDelegate> {
     void addOrUpdateExtraneousGroupEntry(Group group);
 
     /**
-     * Remove the group entry from extraneous database.
+     * Remove the group entry from extraneous storage.
      *
      * @param group group entry
      */

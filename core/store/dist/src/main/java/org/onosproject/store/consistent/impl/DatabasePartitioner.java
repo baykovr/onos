@@ -24,7 +24,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.hash.Hashing;
 
 /**
- * Partitioner for mapping map entries to individual database partitions.
+ * Partitioner for mapping map entries to individual storage partitions.
  * <p>
  * By default a md5 hash of the hash key (key or map name) is used to pick a
  * partition.

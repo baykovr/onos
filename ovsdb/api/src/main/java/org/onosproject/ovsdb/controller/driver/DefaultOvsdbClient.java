@@ -160,7 +160,7 @@ public class DefaultOvsdbClient
     /**
      * Gets the ovsdb table store.
      *
-     * @param dbName the ovsdb database name
+     * @param dbName the ovsdb storage name
      * @return ovsTableStore, empty if table store is find
      */
     private OvsdbTableStore getTableStore(String dbName) {
@@ -173,7 +173,7 @@ public class DefaultOvsdbClient
     /**
      * Gets the ovsdb row store.
      *
-     * @param dbName    the ovsdb database name
+     * @param dbName    the ovsdb storage name
      * @param tableName the ovsdb table name
      * @return ovsRowStore, empty store if no rows exist in the table
      */
@@ -193,7 +193,7 @@ public class DefaultOvsdbClient
     /**
      * Gets the ovsdb row.
      *
-     * @param dbName    the ovsdb database name
+     * @param dbName    the ovsdb storage name
      * @param tableName the ovsdb table name
      * @param uuid      the key of the row
      * @return row, empty if row is find
@@ -495,7 +495,7 @@ public class DefaultOvsdbClient
         String ovsUuid = getOvsUuid(OvsdbConstant.DATABASENAME);
 
         if (dbSchema == null || ovsUuid == null) {
-            log.warn("Couldn't find database Open_vSwitch");
+            log.warn("Couldn't find storage Open_vSwitch");
             return false;
         }
 
@@ -956,11 +956,11 @@ public class DefaultOvsdbClient
             Function<JsonNode, DatabaseSchema> rowFunction = new Function<JsonNode, DatabaseSchema>() {
                 @Override
                 public DatabaseSchema apply(JsonNode input) {
-                    log.info("Get ovsdb database schema {}", dbName);
+                    log.info("Get ovsdb storage schema {}", dbName);
                     DatabaseSchema dbSchema = FromJsonUtil
                             .jsonNodeToDbSchema(dbName, input);
                     if (dbSchema == null) {
-                        log.debug("Get ovsdb database schema error");
+                        log.debug("Get ovsdb storage schema error");
                         return null;
                     }
                     schema.put(dbName, dbSchema);

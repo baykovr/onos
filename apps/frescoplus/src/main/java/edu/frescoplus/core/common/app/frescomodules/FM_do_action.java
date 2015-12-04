@@ -1,11 +1,11 @@
-package edu.frescoplus.module.legacy;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
-public class FM_do_action extends AFP_Module{
+public class FM_do_action extends AFP_Module {
     boolean doAction;
-    public FM_do_action(String name, AFP_Generic library,
+    public FM_do_action(String name, AFP_Library library,
                         boolean doAction)
     {
         super(name,library);

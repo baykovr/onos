@@ -206,9 +206,9 @@ public class DatabaseManager implements StorageService, StorageAdminService {
             .thenCompose(v -> CompletableFuture.allOf(inMemoryDatabase.open(), partitionedDatabase.open())
             .whenComplete((db, error) -> {
                 if (error != null) {
-                    log.error("Failed to initialize database.", error);
+                    log.error("Failed to initialize storage.", error);
                 } else {
-                    log.info("Successfully initialized database.");
+                    log.info("Successfully initialized storage.");
                 }
             }));
 
@@ -292,7 +292,7 @@ public class DatabaseManager implements StorageService, StorageAdminService {
     /**
      * Maps a Raft Database object to a PartitionInfo object.
      *
-     * @param database database containing input data
+     * @param database storage containing input data
      * @return PartitionInfo object
      */
     private static PartitionInfo toPartitionInfo(Database database) {

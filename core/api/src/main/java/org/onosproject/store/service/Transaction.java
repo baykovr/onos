@@ -65,7 +65,7 @@ public interface Transaction {
     /**
      * Returns the list of updates that are part of this transaction.
      *
-     * @return list of database updates
+     * @return list of storage updates
      */
     List<DatabaseUpdate> updates();
 

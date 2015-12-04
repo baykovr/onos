@@ -15,12 +15,12 @@
  */
 package edu.frescoplus.onos;
 
-import edu.frescoplus.module.legacy.FM_blacklist_check;
-import edu.frescoplus.module.legacy.FM_do_action;
-import edu.frescoplus.module.legacy.FM_select;
-import edu.frescoplus.runtime.AFP_RTE;
+import edu.frescoplus.core.common.app.frescomodules.FM_blacklist_check;
+import edu.frescoplus.core.common.app.frescomodules.FM_do_action;
+import edu.frescoplus.core.common.app.frescomodules.FM_select;
+import edu.frescoplus.core.runtime.AFP_RTE;
 
-import edu.frescoplus.runtime.FPM_Graph;
+import edu.frescoplus.core.runtime.models.AFP_AppModel;
 import org.apache.felix.scr.annotations.*;
 import org.onlab.packet.Ethernet;
 import org.onosproject.core.ApplicationId;
@@ -83,7 +83,7 @@ public class FP_ONOSRTE extends AFP_RTE {
         // packet selector intercept
         packetService.requestPackets(intercept, PacketPriority.REACTIVE, appId);
 
-        // Instantiate the generic function library with our ONOS function binding imlementation.
+        // Instantiate the common function library with our ONOS function binding imlementation.
         library = new FP_libONOS(LoggerFactory.getLogger( getClass() ));
 
         addStaticApp();
@@ -112,7 +112,7 @@ public class FP_ONOSRTE extends AFP_RTE {
 
     public void addStaticApp()
     {
-        FPM_Graph scanDetector = new FPM_Graph("scan-detector");
+        AFP_AppModel scanDetector = new AFP_AppModel("scan-detector");
 
         FM_select ip_selector = new FM_select("ip-selector",library,
                 "srcIP");

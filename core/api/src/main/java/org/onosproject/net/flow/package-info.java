@@ -15,7 +15,7 @@
  */
 
 /**
- * Flow rule model &amp; related services API definitions.
+ * Flow rule model &amp; related service API definitions.
  *
  * <p>
  * The figure below depicts the general interactions between different

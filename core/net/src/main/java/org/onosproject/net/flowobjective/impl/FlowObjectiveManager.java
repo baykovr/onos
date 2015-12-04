@@ -90,7 +90,7 @@ public class FlowObjectiveManager implements FlowObjectiveService {
     protected ClusterService clusterService;
 
     // Note: The following dependencies are added on behalf of the pipeline
-    // driver behaviours to assure these services are available for their
+    // driver behaviours to assure these service are available for their
     // initialization.
     @Reference(cardinality = ReferenceCardinality.MANDATORY_UNARY)
     protected FlowRuleService flowRuleService;

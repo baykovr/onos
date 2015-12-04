@@ -51,7 +51,7 @@ public abstract class AbstractOvsdbTableService implements OvsdbTableService {
      */
     public AbstractOvsdbTableService(DatabaseSchema dbSchema, Row row, OvsdbTable table,
                                      VersionNum formVersion) {
-        checkNotNull(dbSchema, "database schema cannot be null");
+        checkNotNull(dbSchema, "storage schema cannot be null");
         checkNotNull(row, "row cannot be null");
         checkNotNull(table, "table cannot be null");
         checkNotNull(formVersion, "the initial version cannot be null");

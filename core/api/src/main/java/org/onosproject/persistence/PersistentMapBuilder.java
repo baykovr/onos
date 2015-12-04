@@ -41,7 +41,7 @@ public interface PersistentMapBuilder<K, V> {
     PersistentMapBuilder<K, V> withSerializer(Serializer serializer);
 
     /**
-     * Validates the map settings and then builds this map in the database.  Throws an exception if invalid settings
+     * Validates the map settings and then builds this map in the storage.  Throws an exception if invalid settings
      * are found.
      * @return The map that was created
      */

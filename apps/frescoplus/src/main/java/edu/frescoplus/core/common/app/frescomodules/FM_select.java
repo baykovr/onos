@@ -1,7 +1,7 @@
-package edu.frescoplus.module.legacy;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 /*
 * A traffic selector/filter.
@@ -11,7 +11,7 @@ public class FM_select extends AFP_Module {
     public int result;
     String packet_attribute;
 
-    public FM_select(String name, AFP_Generic library,
+    public FM_select(String name, AFP_Library library,
                      String packet_attribute){
         super(name,library);
         this.packet_attribute = packet_attribute;

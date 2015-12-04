@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * OvsdbSet is either an atom, representing a set with exactly one element, or
- * a 2-element JSON array that represents a database set value.
+ * a 2-element JSON array that represents a storage set value.
  *
  */
 @JsonSerialize(using = OvsdbSetSerializer.class)

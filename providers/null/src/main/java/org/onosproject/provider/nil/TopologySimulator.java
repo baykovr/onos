@@ -97,7 +97,7 @@ public abstract class TopologySimulator {
 
     /**
      * Initializes a new topology simulator with access to the specified service
-     * directory and various provider services.
+     * directory and various provider service.
      *
      * @param topoShape             topology shape specifier
      * @param deviceCount           number of devices in the topology

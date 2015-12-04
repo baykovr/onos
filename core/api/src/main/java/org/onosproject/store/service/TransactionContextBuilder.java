@@ -21,7 +21,7 @@ package org.onosproject.store.service;
 public interface TransactionContextBuilder {
 
     /**
-     * Disables distribution of map entries across multiple database partitions.
+     * Disables distribution of map entries across multiple storage partitions.
      * <p>
      * When partitioning is disabled, the returned map will have a single
      * partition that spans the entire cluster. Furthermore, the changes made to

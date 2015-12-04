@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
 import com.google.common.collect.Maps;
 
 /**
- * The class representing a database data.
+ * The class representing a storage data.
  */
 public class OvsdbTableStore {
 

@@ -15,6 +15,6 @@
  */
 
 /**
- * Infrastructure device model &amp; related services API definitions.
+ * Infrastructure device model &amp; related service API definitions.
  */
 package org.onosproject.net.device;

@@ -15,7 +15,7 @@
  */
 
 /**
- * Distributed core state management services.
+ * Distributed core state management service.
  */
 package org.onosproject.store.service;
 

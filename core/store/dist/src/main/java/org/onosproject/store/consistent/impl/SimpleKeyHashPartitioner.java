@@ -19,7 +19,7 @@ package org.onosproject.store.consistent.impl;
 import java.util.List;
 
 /**
- * A simple Partitioner for mapping keys to database partitions.
+ * A simple Partitioner for mapping keys to storage partitions.
  * <p>
  * This class uses a md5 hash based hashing scheme for hashing the key to
  * a partition.

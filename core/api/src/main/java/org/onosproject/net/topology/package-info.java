@@ -15,6 +15,6 @@
  */
 
 /**
- * Network topology model &amp; related services API definitions.
+ * Network topology model &amp; related service API definitions.
  */
 package org.onosproject.net.topology;

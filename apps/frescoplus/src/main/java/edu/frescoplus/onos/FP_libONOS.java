@@ -1,22 +1,20 @@
 package edu.frescoplus.onos;
 
-import edu.frescoplus.generic.AFP_Generic;
+import edu.frescoplus.core.common.lib.AFP_Library;
 import org.onlab.packet.*;
 import org.onosproject.core.ApplicationId;
 import org.onosproject.net.DeviceId;
 import org.onosproject.net.flow.*;
 import org.onosproject.net.flow.criteria.Criterion;
-import org.onosproject.net.flow.criteria.IPCriterion;
 import org.onosproject.net.flowobjective.DefaultForwardingObjective;
 import org.onosproject.net.flowobjective.FlowObjectiveService;
 import org.onosproject.net.flowobjective.ForwardingObjective;
 import org.onosproject.net.packet.PacketContext;
 import org.slf4j.Logger;
 
-import java.net.Inet4Address;
 import java.util.Set;
 
-public class FP_libONOS extends AFP_Generic {
+public class FP_libONOS extends AFP_Library {
 
     private ApplicationId appId;
     private PacketContext context;

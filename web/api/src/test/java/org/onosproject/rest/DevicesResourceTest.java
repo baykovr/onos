@@ -220,7 +220,7 @@ public class DevicesResourceTest extends ResourceTest {
                 .andReturn(MastershipRole.MASTER)
                 .anyTimes();
 
-        // Register the services needed for the test
+        // Register the service needed for the test
         CodecManager codecService =  new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

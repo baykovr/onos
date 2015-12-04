@@ -1,4 +1,4 @@
-package edu.frescoplus.util;
+package edu.frescoplus.core.util;
 
 public class HostConnection
 {

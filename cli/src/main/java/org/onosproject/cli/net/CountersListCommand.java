@@ -75,12 +75,12 @@ public class CountersListCommand extends AbstractShellCommand {
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode jsonCounters = mapper.createArrayNode();
 
-        // Create a JSON node for partitioned database counter
+        // Create a JSON node for partitioned storage counter
         ObjectNode jsonPartitionedDatabaseCounters = mapper.createObjectNode();
         jsonPartitionedDatabaseCounters.set("partitionedDatabaseCounters",
                                             json(partitionedDbCounters));
         jsonCounters.add(jsonPartitionedDatabaseCounters);
-        // Create a JSON node for in-memory database counter
+        // Create a JSON node for in-memory storage counter
         ObjectNode jsonInMemoryDatabseCounters = mapper.createObjectNode();
         jsonInMemoryDatabseCounters.set("inMemoryDatabaseCounters",
                                         json(inMemoryDbCounters));
@@ -98,9 +98,9 @@ public class CountersListCommand extends AbstractShellCommand {
         if (outputJson()) {
             print("%s", jsonAllCounters(partitionedDatabaseCounters, inMemoryDatabaseCounters));
         } else {
-            print("Partitioned database counters:");
+            print("Partitioned storage counters:");
             displayCounters(partitionedDatabaseCounters);
-            print("In-memory database counters:");
+            print("In-memory storage counters:");
             displayCounters(inMemoryDatabaseCounters);
         }
     }

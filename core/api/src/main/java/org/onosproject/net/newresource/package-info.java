@@ -15,7 +15,7 @@
  */
 
 /**
- * Generic network resource model and services for resource allocation and
+ * Generic network resource model and service for resource allocation and
  * resource tracking.
  */
 package org.onosproject.net.newresource;

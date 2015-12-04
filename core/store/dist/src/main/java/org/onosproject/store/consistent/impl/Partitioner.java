@@ -17,14 +17,14 @@
 package org.onosproject.store.consistent.impl;
 
 /**
- * Partitioner is responsible for mapping keys to individual database partitions.
+ * Partitioner is responsible for mapping keys to individual storage partitions.
  *
  * @param <K> key type.
  */
 public interface Partitioner<K> {
 
     /**
-     * Returns the database partition.
+     * Returns the storage partition.
      * @param mapName map name
      * @param key key
      * @return Database partition

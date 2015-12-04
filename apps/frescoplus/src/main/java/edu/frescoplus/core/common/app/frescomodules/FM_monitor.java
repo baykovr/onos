@@ -1,12 +1,12 @@
-package edu.frescoplus.module.legacy;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 import java.util.Date;
 
-public class FM_monitor extends AFP_Module{
-    public FM_monitor(String name, AFP_Generic library)
+public class FM_monitor extends AFP_Module {
+    public FM_monitor(String name, AFP_Library library)
     {
         super(name,library);
     }

@@ -54,7 +54,7 @@ public class DefaultDistributedQueue<E>  implements DistributedQueue<E> {
                                    Serializer serializer,
                                    boolean meteringEnabled) {
         this.name = checkNotNull(name, "queue name cannot be null");
-        this.database = checkNotNull(database, "database cannot be null");
+        this.database = checkNotNull(database, "storage cannot be null");
         this.serializer = checkNotNull(serializer, "serializer cannot be null");
         this.monitor = new MeteringAgent(PRIMITIVE_NAME, name, meteringEnabled);
         this.database.registerConsumer(update -> {

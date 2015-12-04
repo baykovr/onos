@@ -26,7 +26,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Default builder for persistent maps stored in the mapDB local database via the persistence service.
+ * Default builder for persistent maps stored in the mapDB local storage via the persistence service.
  */
 public class DefaultPersistentMapBuilder<K, V> implements PersistentMapBuilder<K, V> {
 
@@ -38,7 +38,7 @@ public class DefaultPersistentMapBuilder<K, V> implements PersistentMapBuilder<K
 
 
     public DefaultPersistentMapBuilder(DB localDB) {
-        checkNotNull(localDB, "The local database cannot be null.");
+        checkNotNull(localDB, "The local storage cannot be null.");
         this.localDB = localDB;
     }
 

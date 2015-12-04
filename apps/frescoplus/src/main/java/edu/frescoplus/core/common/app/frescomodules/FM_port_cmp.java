@@ -1,7 +1,7 @@
-package edu.frescoplus.module.legacy;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 /**
  * FrescoModule : takes an incoming flow,
@@ -13,7 +13,7 @@ public class FM_port_cmp extends AFP_Module {
     public int port;
     public boolean result;
 
-    public FM_port_cmp(String name, AFP_Generic library,
+    public FM_port_cmp(String name, AFP_Library library,
                        int port)
     {
         super(name,library);

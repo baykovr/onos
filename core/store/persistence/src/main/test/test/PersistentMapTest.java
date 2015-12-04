@@ -44,7 +44,7 @@ public class PersistentMapTest {
 
 
     /**
-     * Set up the database, create a map and a direct executor to handle it.
+     * Set up the storage, create a map and a direct executor to handle it.
      *
      * @throws Exception if instantiation fails
      */

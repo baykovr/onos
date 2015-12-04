@@ -8,7 +8,7 @@ import org.onosproject.net.topology.TopologyVertex;
 import java.util.Set;
 
 /**
- * Default implementation of an immutable topology graph based on a generic
+ * Default implementation of an immutable topology graph based on a common
  * implementation of adjacency lists graph.
  */
 public class DefaultMutableTopologyGraph

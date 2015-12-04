@@ -365,7 +365,7 @@ public class DefaultGroupHandler {
 
     protected void addNeighborAtPort(DeviceId neighborId,
                                      PortNumber portToNeighbor) {
-        // Update DeviceToPort database
+        // Update DeviceToPort storage
         log.debug("Device {} addNeighborAtPort: neighbor {} at port {}",
                   deviceId, neighborId, portToNeighbor);
         if (devicePortMap.get(neighborId) != null) {
@@ -376,7 +376,7 @@ public class DefaultGroupHandler {
             devicePortMap.put(neighborId, ports);
         }
 
-        // Update portToDevice database
+        // Update portToDevice storage
         if (portDeviceMap.get(portToNeighbor) == null) {
             portDeviceMap.put(portToNeighbor, neighborId);
         }

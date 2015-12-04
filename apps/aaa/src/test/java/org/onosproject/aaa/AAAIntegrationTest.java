@@ -51,7 +51,7 @@ public class AAAIntegrationTest extends AAATestBase {
     }
 
     /**
-     * Sets up the services required by the AAA application.
+     * Sets up the service required by the AAA application.
      */
     @Before
     public void setUp() {

@@ -54,13 +54,13 @@ public class TransactionManager {
     private final AsyncConsistentMap<Long, Transaction> transactions;
 
     /**
-     * Constructs a new TransactionManager for the specified database instance.
+     * Constructs a new TransactionManager for the specified storage instance.
      *
-     * @param database database
+     * @param database storage
      * @param mapBuilder builder for ConsistentMap instances
      */
     public TransactionManager(Database database, ConsistentMapBuilder<Long, Transaction> mapBuilder) {
-        this.database = checkNotNull(database, "database cannot be null");
+        this.database = checkNotNull(database, "storage cannot be null");
         this.transactions = mapBuilder.withName("onos-transactions")
                                       .withSerializer(serializer)
                                       .buildAsyncMap();

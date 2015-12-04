@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 /**
- * Default database state.
+ * Default storage state.
  */
 public class DefaultDatabaseState implements DatabaseState<String, byte[]> {
     private Long nextVersion;

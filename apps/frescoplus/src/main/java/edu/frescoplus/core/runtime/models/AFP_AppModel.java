@@ -1,23 +1,21 @@
-package edu.frescoplus.runtime;
+package edu.frescoplus.core.runtime.models;
+
+import edu.frescoplus.core.common.app.AFP_Module;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import edu.frescoplus.module.AFP_Module;
-
 /*
-* Defines in which order we will execute fp modules
-* Holds references to all modules.
-* Using only a Single Entry point, i.e. a single module is marked as the entry
-* point for the program.
+*
+* Models application execution.
 * */
-
-public class FPM_Graph implements Iterable<AFP_Module>{
+public class AFP_AppModel implements Iterable<AFP_Module>
+{
 	public final String name;
 
 	private ArrayList<AFP_Module> modules;
 
-	public FPM_Graph(String name) {
+	public AFP_AppModel(String name) {
 		assert (modules.size() > 0);
 		this.name = name;
 		this.modules = new ArrayList<AFP_Module>();

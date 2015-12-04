@@ -40,7 +40,7 @@ public interface PersistentSetBuilder<E> {
     PersistentSetBuilder<E> withSerializer(Serializer serializer);
 
     /**
-     * Validates the set settings and then builds this map in the database.  Throws an exception if invalid settings
+     * Validates the set settings and then builds this map in the storage.  Throws an exception if invalid settings
      * are found.
      * @return The set that was created
      */

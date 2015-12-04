@@ -271,7 +271,7 @@ public class FlowsResourceTest extends ResourceTest {
                 .andReturn(APP_ID).anyTimes();
         replay(mockCoreService);
 
-        // Register the services needed for the test
+        // Register the service needed for the test
         final CodecManager codecService =  new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

@@ -28,7 +28,7 @@ public class TableDescription {
 
     // The table name
     private final String name;
-    // The database name
+    // The storage name
     private final String database = "Open_vSwitch";
     // The initial version
     private final String fromVersion;
@@ -83,8 +83,8 @@ public class TableDescription {
     }
 
     /**
-     * Returns the database name.
-     * @return the database name
+     * Returns the storage name.
+     * @return the storage name
      */
     public String database() {
         return database;

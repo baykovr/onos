@@ -76,7 +76,7 @@ public final class FromJsonUtil {
 
     /**
      * convert JsonNode into DatabaseSchema.
-     * @param dbName database name
+     * @param dbName storage name
      * @param dbJson the JsonNode of get_schema result
      * @return DatabaseSchema
      * @throws AbnormalJsonNodeException this is an abnormal JsonNode exception

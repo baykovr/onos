@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 /**
- * Contains information about a database partition.
+ * Contains information about a storage partition.
  */
 public class PartitionInfo {
     private final String name;

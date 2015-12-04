@@ -1,15 +1,13 @@
-package edu.frescoplus.module.legacy;
+package edu.frescoplus.core.common.app.frescomodules;
 
-import edu.frescoplus.generic.AFP_Generic;
-import edu.frescoplus.module.AFP_Module;
-
-import java.net.Inet4Address;
+import edu.frescoplus.core.common.app.AFP_Module;
+import edu.frescoplus.core.common.lib.AFP_Library;
 
 
-public class FM_find_scan extends AFP_Module{
+public class FM_find_scan extends AFP_Module {
     public boolean result;
     int check_ip;
-    public FM_find_scan(String name, AFP_Generic library,
+    public FM_find_scan(String name, AFP_Library library,
                          int check_ip)
     {
         super(name,library);

@@ -28,7 +28,7 @@ import org.onosproject.net.statistic.StatisticService;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * A bundle of services that the topology view requires to get its job done.
+ * A bundle of service that the topology view requires to get its job done.
  */
 public class ServicesBundle {
 
@@ -41,7 +41,7 @@ public class ServicesBundle {
     private final PortStatisticsService portStatsService;
 
     /**
-     * Creates the services bundle.
+     * Creates the service bundle.
      *
      * @param intentService     intent service reference
      * @param deviceService     device service reference

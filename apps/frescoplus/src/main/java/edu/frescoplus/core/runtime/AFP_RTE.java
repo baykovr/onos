@@ -1,15 +1,21 @@
-package edu.frescoplus.runtime;
+package edu.frescoplus.core.runtime;
+
+import edu.frescoplus.core.runtime.models.AFP_AppModel;
 
 import java.util.ArrayList;
 
 public abstract class AFP_RTE{
 
 	// Application Model
-	public ArrayList<FPM_Graph> fpApps;
+
+	//
+	//public AFP_AppModel<AFP_Modular>
+
+	public ArrayList<AFP_AppModel> fpApps;
 
 	public AFP_RTE()
 	{
-		fpApps = new ArrayList<FPM_Graph>();
+		fpApps = new ArrayList<AFP_AppModel>();
 	}
 
 
@@ -18,7 +24,7 @@ public abstract class AFP_RTE{
 		if ( fpApps.size() > 0)
 		{
 			//library.log.info("[FP] Executing : {} \n", fpApps.get(0).name);
-			for(FPM_Graph app : fpApps)
+			for(AFP_AppModel app : fpApps)
 			{
 				app.exec();
 			}

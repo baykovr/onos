@@ -24,7 +24,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Default builder for persistent sets stored in the mapDB local database via the persistence service..
+ * Default builder for persistent sets stored in the mapDB local storage via the persistence service..
  */
 public class DefaultPersistentSetBuilder<E> implements PersistentSetBuilder<E> {
 
@@ -35,7 +35,7 @@ public class DefaultPersistentSetBuilder<E> implements PersistentSetBuilder<E> {
     private Serializer serializer = null;
 
     public DefaultPersistentSetBuilder(DB localDB) {
-        this.localDB = checkNotNull(localDB, "The local database cannot be null.");
+        this.localDB = checkNotNull(localDB, "The local storage cannot be null.");
     }
 
     public PersistentSetBuilder<E> withName(String name) {

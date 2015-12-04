@@ -206,23 +206,23 @@ public interface OvsdbClientService extends OvsdbRPC {
     /**
      * Gets the Ovs uuid.
      *
-     * @param dbName database name
+     * @param dbName storage name
      * @return ovs uuid, empty if no uuid is find
      */
     String getOvsUuid(String dbName);
 
     /**
-     * Gets the ovsdb database schema.
+     * Gets the ovsdb storage schema.
      *
-     * @param dbName database name
-     * @return database schema
+     * @param dbName storage name
+     * @return storage schema
      */
     ListenableFuture<DatabaseSchema> getOvsdbSchema(String dbName);
 
     /**
      * Gets the ovsdb table updates.
      *
-     * @param dbName database name
+     * @param dbName storage name
      * @param id     random uuid
      * @return table updates
      */
@@ -231,7 +231,7 @@ public interface OvsdbClientService extends OvsdbRPC {
     /**
      * Gets the ovsdb config operation result.
      *
-     * @param dbName     database name
+     * @param dbName     storage name
      * @param operations the list of operations
      * @return operation results
      */
@@ -239,17 +239,17 @@ public interface OvsdbClientService extends OvsdbRPC {
                                                            List<Operation> operations);
 
     /**
-     * Gets the ovsdb database schema from local.
+     * Gets the ovsdb storage schema from local.
      *
-     * @param dbName database name
-     * @return database schema
+     * @param dbName storage name
+     * @return storage schema
      */
     DatabaseSchema getDatabaseSchema(String dbName);
 
     /**
      * Gets the ovsdb row from the local ovsdb store.
      *
-     * @param dbName    database name
+     * @param dbName    storage name
      * @param tableName table name
      * @param uuid      row uuid
      * @return row ovsdb row
@@ -259,7 +259,7 @@ public interface OvsdbClientService extends OvsdbRPC {
     /**
      * Removes the ovsdb row from the local ovsdb store.
      *
-     * @param dbName    database name
+     * @param dbName    storage name
      * @param tableName table name
      * @param uuid      row uuid
      */
@@ -268,7 +268,7 @@ public interface OvsdbClientService extends OvsdbRPC {
     /**
      * Updates the local ovsdb store.
      *
-     * @param dbName    database name
+     * @param dbName    storage name
      * @param tableName table name
      * @param uuid      row uuid
      * @param row       ovsdb row

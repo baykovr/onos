@@ -71,7 +71,7 @@ class LinkDiscovery implements TimerTask {
 
     /**
      * Instantiates discovery manager for the given physical switch. Creates a
-     * generic LLDP packet that will be customized for the port it is sent out on.
+     * common LLDP packet that will be customized for the port it is sent out on.
      * Starts the the timer for the discovery process.
      *
      * @param device  the physical switch

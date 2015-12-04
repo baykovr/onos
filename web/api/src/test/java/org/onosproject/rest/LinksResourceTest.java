@@ -153,7 +153,7 @@ public class LinksResourceTest extends ResourceTest {
     public void setUpTest() {
         mockLinkService = createMock(LinkService.class);
 
-        // Register the services needed for the test
+        // Register the service needed for the test
         CodecManager codecService =  new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

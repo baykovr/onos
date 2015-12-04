@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Objects;
 
 /**
- * a JSON object that describes the type of a database column, with key and
+ * a JSON object that describes the type of a storage column, with key and
  * value. Refer to RFC 7047 Section 3.2.
  */
 public final class KeyValuedColumnType implements ColumnType {

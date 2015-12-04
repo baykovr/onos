@@ -135,7 +135,7 @@ public class PathsResourceTest extends ResourceTest {
     @Before
     public void setUpTest() {
 
-        // Register the services needed for the test
+        // Register the service needed for the test
         CodecManager codecService =  new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Objects;
 
 /**
- * Column is the basic element of the OpenVswitch database.
+ * Column is the basic element of the OpenVswitch storage.
  */
 public final class Column {
     private final String columnName;

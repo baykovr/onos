@@ -48,7 +48,7 @@ public class XosManager {
     private static final int TEST_XOS_SERVER_PORT = 8000;
     private static final String URI_RS = "/rs/";
     private static final String URI_SUBSCRIBER = "/rs/subscriber/%d/";
-    private static final String BUNDLE_URI_FORMAT = "services/%s/%s/";
+    private static final String BUNDLE_URI_FORMAT = "service/%s/%s/";
 
 
     private String xosServerIp;

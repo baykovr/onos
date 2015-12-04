@@ -15,6 +15,6 @@
  */
 
 /**
- * Flow meter model and related services.
+ * Flow meter model and related service.
  */
 package org.onosproject.net.meter;

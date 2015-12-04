@@ -244,7 +244,7 @@ public class IntentsResourceTest extends ResourceTest {
         expect(mockIntentService.getIntentState(anyObject()))
                 .andReturn(IntentState.INSTALLED)
                 .anyTimes();
-        // Register the services needed for the test
+        // Register the service needed for the test
         final CodecManager codecService =  new CodecManager();
         codecService.activate();
         ServiceDirectory testDirectory =

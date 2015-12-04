@@ -15,6 +15,6 @@
  */
 
 /**
- * Implementation of the generic network resource subsystem.
+ * Implementation of the common network resource subsystem.
  */
 package org.onosproject.net.newresource.impl;

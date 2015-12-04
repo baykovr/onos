@@ -20,7 +20,7 @@ package org.onosproject.store.service;
  * <p>
  * This service provides builders for various distributed primitives.
  * <p>
- * It is expected that services and applications will leverage the primitives indirectly provided by
+ * It is expected that service and applications will leverage the primitives indirectly provided by
  * this service for their distributed state management and coordination.
  */
 public interface StorageService {

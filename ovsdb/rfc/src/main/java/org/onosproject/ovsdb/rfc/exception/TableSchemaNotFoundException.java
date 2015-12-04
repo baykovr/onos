@@ -43,7 +43,7 @@ public class TableSchemaNotFoundException extends RuntimeException {
     /**
      * Create error message.
      * @param tableName table name
-     * @param schemaName database name
+     * @param schemaName storage name
      * @return message
      */
     public static String createMessage(String tableName, String schemaName) {

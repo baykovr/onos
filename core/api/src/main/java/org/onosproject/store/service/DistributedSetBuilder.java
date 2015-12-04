@@ -85,7 +85,7 @@ public interface DistributedSetBuilder<E> {
     DistributedSetBuilder<E> withRelaxedReadConsistency();
 
     /**
-     * Disables distribution of set entries across multiple database partitions.
+     * Disables distribution of set entries across multiple storage partitions.
      * <p>
      * When partitioning is disabled, the returned set will have a single partition
      * that spans the entire cluster. Furthermore, the changes made to the set are

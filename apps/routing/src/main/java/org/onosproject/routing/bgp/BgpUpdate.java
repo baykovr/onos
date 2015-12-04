@@ -189,7 +189,7 @@ final class BgpUpdate {
         //
         Short origin = -1;                      // Mandatory
         BgpRouteEntry.AsPath asPath = null;     // Mandatory
-        // Legacy NLRI (RFC 4271). Mandatory NEXT_HOP if legacy NLRI is used
+        // Legacy NLRI (RFC 4271). Mandatory NEXT_HOP if modular NLRI is used
         MpNlri legacyNlri = new MpNlri(
                 BgpConstants.Open.Capabilities.MultiprotocolExtensions.AFI_IPV4,
                                        BgpConstants.Open.Capabilities.MultiprotocolExtensions.SAFI_UNICAST);
@@ -375,7 +375,7 @@ final class BgpUpdate {
         try {
             Collection<Ip4Prefix> addedPrefixes4 =
                 parsePackedIp4Prefixes(nlriLength, message);
-            // Store it inside the legacy NLRI wrapper
+            // Store it inside the modular NLRI wrapper
             legacyNlri.nlri4 = addedPrefixes4;
         } catch (BgpMessage.BgpParseException e) {
             // ERROR: Invalid Network Field
@@ -479,8 +479,8 @@ final class BgpUpdate {
      * @param origin the ORIGIN well-known mandatory attribute
      * @param asPath the AS_PATH well-known mandatory attribute
      * @param localPref the LOCAL_PREF required attribute
-     * @param legacyNlri the legacy NLRI. Encapsulates the NEXT_HOP well-known
-     * mandatory attribute (mandatory if legacy NLRI is used).
+     * @param legacyNlri the modular NLRI. Encapsulates the NEXT_HOP well-known
+     * mandatory attribute (mandatory if modular NLRI is used).
      * @param mpNlriReachList the Multiprotocol NLRI attributes
      * @throws BgpMessage.BgpParseException
      */
@@ -501,7 +501,7 @@ final class BgpUpdate {
         //
         // NOTE: The hasLegacyNlri flag is always set to true if the
         // Multiprotocol Extensions are not enabled, even if the UPDATE
-        // message doesn't contain the legacy NLRI (per RFC 4271).
+        // message doesn't contain the modular NLRI (per RFC 4271).
         //
         if (!bgpSession.mpExtensions()) {
             hasNlri = true;

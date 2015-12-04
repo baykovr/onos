@@ -30,10 +30,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * CLI to work with database transactions in the system.
+ * CLI to work with storage transactions in the system.
  */
 @Command(scope = "onos", name = "transactions",
-        description = "Utility for viewing and redriving database transactions")
+        description = "Utility for viewing and redriving storage transactions")
 public class TransactionsCommand extends AbstractShellCommand {
 
     @Option(name = "-r", aliases = "--redrive",

@@ -70,21 +70,21 @@ public class PersistenceManager implements PersistenceService {
         Path dbFolderPath = Paths.get(ENCLOSING_FOLDER);
         //Make sure the directory exists, if it does not, make it.
         if (!dbFolderPath.toFile().isDirectory()) {
-            log.info("The specified folder location for the database did not exist and will be created.");
+            log.info("The specified folder location for the storage did not exist and will be created.");
             try {
                 Files.createDirectories(dbFolderPath);
             } catch (IOException e) {
-                log.error("Could not create the required folder for the database.");
+                log.error("Could not create the required folder for the storage.");
                 throw new PersistenceException("Database folder could not be created.");
             }
         }
-        //Notify if the database file does not exist.
+        //Notify if the storage file does not exist.
         boolean dbFound = Files.exists(dbPath);
         if (!dbFound) {
-            log.info("The database file could not be located, a new database will be constructed.");
+            log.info("The storage file could not be located, a new storage will be constructed.");
 
         } else {
-            log.info("A previous database file has been found.");
+            log.info("A previous storage file has been found.");
         }
         localDB = DBMaker.newFileDB(dbPath.toFile())
                 .asyncWriteEnable()

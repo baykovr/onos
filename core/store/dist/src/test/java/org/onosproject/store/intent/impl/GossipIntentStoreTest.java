@@ -40,7 +40,7 @@ import static org.onosproject.net.NetTestTools.APP_ID;
 import static org.onosproject.net.NetTestTools.hid;
 
 /**
- * Gossip Intent Store test using database adapter.
+ * Gossip Intent Store test using storage adapter.
  */
 public class GossipIntentStoreTest {
 

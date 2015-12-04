@@ -34,7 +34,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * Default database.
+ * Default storage.
  */
 public class DefaultDatabase extends AbstractResource<Database> implements Database {
     private final StateMachine<DatabaseState<String, byte[]>> stateMachine;
@@ -60,12 +60,12 @@ public class DefaultDatabase extends AbstractResource<Database> implements Datab
     }
 
     /**
-     * If the database is closed, returning a failed CompletableFuture. Otherwise, calls the given supplier to
+     * If the storage is closed, returning a failed CompletableFuture. Otherwise, calls the given supplier to
      * return the completed future result.
      *
-     * @param supplier The supplier to call if the database is open.
+     * @param supplier The supplier to call if the storage is open.
      * @param <T>      The future result type.
-     * @return A completable future that if this database is closed is immediately failed.
+     * @return A completable future that if this storage is closed is immediately failed.
      */
     protected <T> CompletableFuture<T> checkOpen(Supplier<CompletableFuture<T>> supplier) {
         if (proxy == null) {

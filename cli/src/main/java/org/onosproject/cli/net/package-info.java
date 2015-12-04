@@ -16,6 +16,6 @@
 
 /**
  * Administrative console command-line extensions for interacting with the
- * network model &amp; services.
+ * network model &amp; service.
  */
 package org.onosproject.cli.net;
