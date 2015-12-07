@@ -1,6 +1,6 @@
 package edu.frescoplus.onos;
 
-import edu.frescoplus.core.common.lib.AFP_Library;
+import edu.frescoplus.core.lib.AFP_Library;
 import org.onlab.packet.*;
 import org.onosproject.core.ApplicationId;
 import org.onosproject.net.DeviceId;
@@ -21,7 +21,7 @@ public class FP_libONOS extends AFP_Library {
     private FlowObjectiveService flowObjectiveService;
     private FlowRuleService flowRuleService;
 
-    private Ethernet pkt;
+
 
     public FP_libONOS(Logger log) {
         super(log);
@@ -37,45 +37,92 @@ public class FP_libONOS extends AFP_Library {
         this.context = context;
         this.flowObjectiveService = flowObjectiveService;
         this.flowRuleService = flowRuleService;
-
-        pkt = context.inPacket().parsed();
     }
 
     @Override
     public boolean isIPv4(){
+        Ethernet pkt = context.inPacket().parsed();
         return pkt.getEtherType() == Ethernet.TYPE_IPV4;
     }
 
     @Override
     public boolean isICMP() {
+        Ethernet pkt = context.inPacket().parsed();
         return (isIPv4()) &&
                 ((IPv4) pkt.getPayload()).getProtocol() == IPv4.PROTOCOL_ICMP;
     }
 
     @Override
     public boolean isTCP() {
+        Ethernet pkt = context.inPacket().parsed();
         return (isIPv4()) &&
                 ((IPv4) pkt.getPayload()).getProtocol() == IPv4.PROTOCOL_TCP;
     }
 
     @Override
     public boolean isUDP() {
+        Ethernet pkt = context.inPacket().parsed();
         return (isIPv4()) &&
                 ((IPv4) pkt.getPayload()).getProtocol() == IPv4.PROTOCOL_UDP;
     }
 
     @Override
+    public fMac getMAC() {
+        Ethernet eth = context.inPacket().parsed();
+        DeviceId deviceId = context.inPacket().receivedFrom().deviceId();
+
+        MacAddress src = eth.getSourceMAC();
+        MacAddress dst = eth.getDestinationMAC();
+
+        return new fMac<MacAddress>(src,dst);
+    }
+
+    @Override
+    public fTCP getTCP()
+    {
+        Ethernet pkt = context.inPacket().parsed();
+        IPv4 ipv4 = (IPv4) pkt.getPayload();
+        TCP tcp   = (TCP) ipv4.getPayload();
+        return new fTCP<>(
+                ipv4.getSourceAddress(),
+                ipv4.getSourceAddress(),
+                tcp.getSourcePort(),
+                tcp.getDestinationPort()
+        );
+    }
+
+    @Override
+    public fUDP getUDP()
+    {
+        Ethernet pkt = context.inPacket().parsed();
+
+        IPv4 ipv4 = (IPv4) pkt.getPayload();
+        UDP udp   = (UDP) ipv4.getPayload();
+
+        return new fUDP<>(
+                ipv4.getSourceAddress(),
+                ipv4.getSourceAddress(),
+                udp.getSourcePort(),
+                udp.getDestinationPort()
+        );
+    }
+
+
+    @Override
     public int getSrcIP() {
+        Ethernet pkt = context.inPacket().parsed();
         return ((IPv4) pkt.getPayload()).getSourceAddress();
     }
 
     @Override
     public int getDstIP() {
+        Ethernet pkt = context.inPacket().parsed();
         return ((IPv4) pkt.getPayload()).getDestinationAddress();
     }
 
     @Override
     public int getDstPort() {
+        Ethernet pkt = context.inPacket().parsed();
         if (isTCP()) {
             IPv4 ipv4 = (IPv4) pkt.getPayload();
             TCP tcp = (TCP) ipv4.getPayload();
@@ -91,6 +138,7 @@ public class FP_libONOS extends AFP_Library {
 
     @Override
     public int getSrcPort() {
+        Ethernet pkt = context.inPacket().parsed();
         if (isTCP()) {
             IPv4 ipv4 = (IPv4) pkt.getPayload();
             TCP tcp = (TCP) ipv4.getPayload();
@@ -135,6 +183,7 @@ public class FP_libONOS extends AFP_Library {
 
     @Override
     public void DROP() {
+        Ethernet pkt = context.inPacket().parsed();
         DeviceId deviceId = context.inPacket().receivedFrom().deviceId();
 
         IPv4 cntxIPv4 = (IPv4) pkt.getPayload();
@@ -168,6 +217,7 @@ public class FP_libONOS extends AFP_Library {
 
     @Override
     public void REDIRECT(int destinationIP) {
+        Ethernet pkt = context.inPacket().parsed();
         // Again we let ifwd do the work for us.
         IPv4 cntxIPv4 = (IPv4) pkt.getPayload();
         cntxIPv4.setDestinationAddress(destinationIP);
@@ -175,6 +225,7 @@ public class FP_libONOS extends AFP_Library {
 
     @Override
     public void MIRROR() {
+        Ethernet pkt = context.inPacket().parsed();
         IPv4 cntxIPv4 = (IPv4) pkt.getPayload();
         int source = getSrcIP();
         int destination = getDstIP();

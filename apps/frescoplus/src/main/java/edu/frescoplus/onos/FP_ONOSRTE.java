@@ -15,12 +15,11 @@
  */
 package edu.frescoplus.onos;
 
-import edu.frescoplus.core.common.app.frescomodules.FM_blacklist_check;
-import edu.frescoplus.core.common.app.frescomodules.FM_do_action;
-import edu.frescoplus.core.common.app.frescomodules.FM_select;
-import edu.frescoplus.core.runtime.AFP_RTE;
+import edu.frescoplus.core.app.fresco.FrescoApp;
+import edu.frescoplus.core.event.FP_Event;
+import edu.frescoplus.core.models.FP_StaticPriorityModel;
+import edu.frescoplus.core.runtime.FP_RTE;
 
-import edu.frescoplus.core.runtime.models.AFP_AppModel;
 import org.apache.felix.scr.annotations.*;
 import org.onlab.packet.Ethernet;
 import org.onosproject.core.ApplicationId;
@@ -34,12 +33,15 @@ import org.onosproject.net.packet.PacketService;
 import org.slf4j.LoggerFactory;
 
 @Component(immediate = true)
-public class FP_ONOSRTE extends AFP_RTE {
+public class FP_ONOSRTE {
 
     private ApplicationId appId;
-    private static final int PRIORITY      = 128;
-    private static final int DROP_PRIORITY = 129;
-    private static final int TIMEOUT_SEC   = 60; // seconds
+
+    private static final int PRIORITY      = 128; //
+    private static final int DROP_PRIORITY = 129; //
+
+    // Flow rule timeout in seconds
+    private static final int TIMEOUT_SEC   = 60;
 
     //<editor-fold desc="Services">
     // Services
@@ -61,17 +63,18 @@ public class FP_ONOSRTE extends AFP_RTE {
     private PacketProcessor packetProcessor = new FP_PacketProcessor();
     private FlowRuleListener flowListener   = new FP_FlowListener();
 
-    // Selector for ICMP traffic that is to be intercepted
+    // Subscribe to IPv4
     private final TrafficSelector intercept = DefaultTrafficSelector.builder()
             .matchEthType(Ethernet.TYPE_IPV4).build();
     //we can also select by ICMP or TCP, etc etc.
     //matchIPProtocol(IPv4.ICMP).build
+
     //</editor-fold>
 
-
-    private FP_libONOS library;
-    //private final FlowRuleListener flowListener = new InternalFlowListener();
-
+    // Fresco plus run time engine.
+    // We specify a static priority model for application execution
+    // and a function library for onos.
+    private FP_RTE<FP_StaticPriorityModel,FP_libONOS> fpEngine;
 
     @Activate
     protected void activate()
@@ -83,12 +86,18 @@ public class FP_ONOSRTE extends AFP_RTE {
         // packet selector intercept
         packetService.requestPackets(intercept, PacketPriority.REACTIVE, appId);
 
-        // Instantiate the common function library with our ONOS function binding imlementation.
-        library = new FP_libONOS(LoggerFactory.getLogger( getClass() ));
+        // Two arguments, new model() and library(logger)
+        fpEngine = new FP_RTE<>(
+                new FP_StaticPriorityModel(),
+                new FP_libONOS(
+                        LoggerFactory.getLogger(getClass())
+                )
+        );
 
-        addStaticApp();
+        // add an application for testing.
+        addTestApplications();
 
-        library.log.info("Started");
+        fpEngine.library.log.info("Started");
     }
 
     @Deactivate
@@ -97,47 +106,28 @@ public class FP_ONOSRTE extends AFP_RTE {
         packetService.removeProcessor(packetProcessor);
         flowRuleService.removeFlowRulesById(appId);
         flowRuleService.removeListener(flowListener);
-        library.log.info("Stopped");
+        fpEngine.library.log.info("Stopped");
     }
 
-    //<editor-fold desc="FP Run Time Engine">
-    // Run Time Engine
-    @Override
-    public void exec() {
-        // Do custom operations (ONOS)
 
-        // Execute AFP RTE Applications
-        super.exec();
-    }
-
-    public void addStaticApp()
+    public void addTestApplications()
     {
-        AFP_AppModel scanDetector = new AFP_AppModel("scan-detector");
+        FrescoApp frescoTestApp = new FrescoApp("hello-world-fre",fpEngine.library);
 
-        FM_select ip_selector = new FM_select("ip-selector",library,
-                "srcIP");
-        FM_blacklist_check blacklist = new FM_blacklist_check("ip-blacklist",library,
-                ip_selector.result);
-
-        FM_do_action dropper = new FM_do_action("dropper",library,
-                blacklist.result);
-
-        scanDetector.addModule(ip_selector);
-        scanDetector.addModule(blacklist);
-        scanDetector.addModule(dropper);
-
-        super.fpApps.add(scanDetector);
+        fpEngine.addApp(frescoTestApp);
     }
-    //</editor-fold>
-// ---------------------------------------------------------------------------------------------------------------------
+
     //<editor-fold desc="Listeners">
     private class FP_PacketProcessor implements PacketProcessor {
         @Override
         public void process(PacketContext context)
         {
-            library.log.info("Got a packet!");
-            library.setContext(appId,context,flowObjectiveService,flowRuleService);
-            exec();
+            fpEngine.library.log.info("Got a packet!");
+
+            fpEngine.library.setContext(appId,context,flowObjectiveService,flowRuleService);
+
+            // A new event has occured.
+            fpEngine.exec(FP_Event.PACKET); // exec RTE
 
             // traffic filter grantees IPv4
             //
@@ -147,6 +137,7 @@ public class FP_ONOSRTE extends AFP_RTE {
             //            }
         }
     }
+
     // Onos allows us to easily listen for flow rule events
     // flow removed etc...
     private class FP_FlowListener implements FlowRuleListener {
