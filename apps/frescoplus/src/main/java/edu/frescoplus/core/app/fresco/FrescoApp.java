@@ -33,14 +33,9 @@ public class FrescoApp extends AFP_App<AFP_Library,FP_Event>
 
     private void staticTest()
     {
-        FM_select ip_selector = new FM_select("ip-selector",library,
-                "srcIP");
-
-        FM_blacklist_check blacklist = new FM_blacklist_check("ip-blacklist",library,
-                ip_selector.result);
-
-        FM_do_action dropper = new FM_do_action("dropper",library,
-                blacklist.result);
+        FM_select ip_selector = new FM_select("ip-selector",library,"srcIP");
+        FM_blacklist_check blacklist = new FM_blacklist_check("ip-blacklist",library, ip_selector.result);
+        FM_do_action dropper = new FM_do_action("dropper",library, blacklist.result);
 
         addModule(ip_selector);
         addModule(blacklist);

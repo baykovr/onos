@@ -22,7 +22,6 @@ public class FP_libONOS extends AFP_Library {
     private FlowRuleService flowRuleService;
 
 
-
     public FP_libONOS(Logger log) {
         super(log);
     }
